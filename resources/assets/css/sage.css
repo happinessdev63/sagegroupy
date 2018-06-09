@@ -1,0 +1,34 @@
+.back-to-top:hover,.bg-custom,.btn-custom,.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
+.navbar-custom  {
+  background-color: #009688 !important;
+}
+
+.btn-white-fill,.text-custom,.btn-white-bordered:hover,.btn-custom:hover,.features-box i,
+.pricing-column .plan-title {
+  color: #009688 !important;
+}
+
+.btn-custom {
+  border: 2px solid #009688 !important;
+}
+
+.intro-form input:focus {
+  border: 1px solid #009688;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ffffff;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ffffff;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: #ffffff;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: #ffffff;
+}
+
