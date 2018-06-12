@@ -16,7 +16,7 @@
         <h4>Job References</h4>
         <hr class="green-hr"/>
         <md-list class="custom-list md-triple-line">
-            <md-list-item v-for="(job,index) in shared.jobs">
+            <md-list-item v-for="(job,index) in shared.jobs" :key="index">
                 <div v-if="primaryImageLink(job)" class="margin-right-20">
                     <img :src="primaryImageLink(job)" class="img-thumbnail" width="80" height="80" alt="Primary Image">
                 </div>
@@ -64,7 +64,7 @@
         <h4>General References</h4>
         <hr class="green-hr"/>
         <md-list class="custom-list md-triple-line">
-            <md-list-item v-for="(reference,index) in shared.references" v-if="reference.type == 'reference'">
+            <md-list-item v-for="(reference,index) in shared.references" v-if="reference.type == 'reference'" :key="index">
                 <div v-if="primaryImageLink(reference)" class="margin-right-20">
                     <img :src="primaryImageLink(reference)" class="img-thumbnail" width="80" height="80" alt="Primary Image">
                 </div>
@@ -98,7 +98,7 @@
         <h4>Imported References</h4>
         <hr class="green-hr"/>
         <md-list class="custom-list md-triple-line">
-            <md-list-item v-for="(reference,index) in shared.references" v-if="reference.type == 'imported'">
+            <md-list-item v-for="(reference,index) in shared.references" v-if="reference.type == 'imported'" :key="index">
                 <div v-if="primaryImageLink(reference)" class="margin-right-20">
                     <img :src="primaryImageLink(reference)" class="img-thumbnail" width="80" height="80" alt="Primary Image">
                 </div>
@@ -146,7 +146,7 @@
             <div class="clearfix"></div>
             <hr class="green-hr"/>
             <md-list class="custom-list md-dense">
-                <md-list-item v-for="user in shared.profile.recommended_users">
+                <md-list-item v-for="user in shared.profile.recommended_users" :key="index">
 
                     <img :src="user.freelancer.avatar" class="img-thumbnail margin-right-10" style="width: 45px; height: 45px;">
 
@@ -165,7 +165,7 @@
                     </md-button>
                     <md-divider class="md-inset"></md-divider>
                 </md-list-item>
-                <md-list-item v-for="user in shared.profile.recommendations">
+                <md-list-item v-for="user in shared.profile.recommendations" :key="index">
 
                     <img :src="user.freelancer.avatar" class="img-thumbnail margin-right-10" style="width: 45px; height: 45px;">
 
@@ -418,7 +418,7 @@
 					this.$root.showNotification(response.body.message);
 				});
 				console.log("deleting " + this.shared.reference.title);
-			},            
+			},
             confirmDeleteJob(job) {
                 this.shared.job = job;
                 this.$refs['delete-job'].open();

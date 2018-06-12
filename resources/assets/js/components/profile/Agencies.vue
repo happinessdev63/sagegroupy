@@ -37,7 +37,7 @@
         </div>
 
         <md-list class="custom-list md-triple-line" v-if="!state.loading">
-            <md-list-item v-for="(agency, key, index) in shared.profile.owned_agencies">
+            <md-list-item v-for="(agency, key, index) in shared.profile.owned_agencies" :key="index">
                 <md-icon class="font-size-40">
                     card_membership
                 </md-icon>
@@ -55,7 +55,7 @@
 
                 <md-divider class="md-inset"></md-divider>
             </md-list-item>
-            <md-list-item v-for="(agency, key, index) in shared.profile.agencies">
+            <md-list-item v-for="(agency, key, index) in shared.profile.agencies" :key="index">
                 <md-icon class="font-size-40">
                     card_membership
                 </md-icon>

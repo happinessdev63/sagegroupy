@@ -64,6 +64,9 @@ Route::get( '/admin/mailLogs', 'Admin\SettingsController@mailLogs' )->middleware
 
 /* User & Profile routes */
 Route::get('/dashboard', 'ProfileController@dashboard')->middleware( [ 'auth' ] );
+// Route::get('/dashboard', function(){
+//   return '{"dd": "OK"}';
+// });
 Route::get( '/profileWizard', 'ProfileController@profileWizard' )->middleware( [ 'auth' ] );
 Route::get('/profile', 'ProfileController@profile');
 Route::get('/profile/{user}', 'ProfileController@viewProfile');

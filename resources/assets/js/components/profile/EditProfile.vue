@@ -156,7 +156,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                         placeholder="Select your experience level"
                 >
                     <md-option v-for="(level,id) in shared.skill.avg_rates"
-                               :value="level.level" v-if="level.level != 'Total'">{{ level.level }}
+                               :value="level.level" v-if="level.level != 'Total'" :key="id">{{ level.level }}
                     </md-option>
                 </md-select>
                 <span v-if="errors.level" class="md-error">{{ errors.level[0] }}</span>
@@ -200,7 +200,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             </md-input-container>
 
             <md-list v-if="!selectedFreelancer.id" class="height-400 md-triple-line">
-                <md-list-item v-for="(freelancer, index) in freelancers">
+                <md-list-item v-for="(freelancer, index) in freelancers" :key="index">
                     <img :src="freelancer.avatar" class="img-thumbnail margin-10" style="width: 70px; height: 70px;">
 
                     <div class="md-list-text-container margin-top-10 margin-left-20 padding-bottom-5">
@@ -269,7 +269,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             </md-input-container>
 
             <md-list v-if="!selectedFreelancer.id" class="height-400 md-triple-line">
-                <md-list-item v-for="(freelancer, index) in freelancers">
+                <md-list-item v-for="(freelancer, index) in freelancers" :key="index">
                     <img :src="freelancer.avatar" class="img-thumbnail margin-10" style="width: 70px; height: 70px;">
 
                     <div class="md-list-text-container margin-top-10 margin-left-20 padding-bottom-5">
@@ -395,7 +395,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                     acceptedFileTypes="image/*,application/pdf,.psd,.doc*,.odf"
                     v-on:vdropzone-success="fileSuccess"
             ></sage-dropzone>
-            
+
             <div slot="footer">
                 <md-button class="md-primary" @click="closeModal('saveLinkModal')">Close</md-button>
                 <md-button class="md-primary" @click="saveLink()">Save</md-button>
@@ -424,7 +424,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                 <md-button class="md-primary" @click="closeModal('fileModal')">Close</md-button>
                 <md-button class="md-primary" @click="saveEditedFile">Save</md-button>
             </div>
-        </ui-modal>        
+        </ui-modal>
 
         <md-dialog-confirm
                 md-title="Delete this file"

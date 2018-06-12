@@ -8,7 +8,7 @@
 
         <!-- Links and References From Other Sites -->
         <md-list class="custom-list md-dense">
-            <md-list-item v-for="(link,index) in links">
+            <md-list-item v-for="(link,index) in links" :key="index">
 
                 <md-icon  class="font-size-40">
                     bookmark

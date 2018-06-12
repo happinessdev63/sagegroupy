@@ -311,7 +311,7 @@ Usage: <sage-create-job> </sage-create-job>
                         placeholder="Select a new leader for this agency."
                 >
                     <md-option v-for="(user,id) in shared.agency.freelancers"
-                               :value="user.id">{{ user.name }}
+                               :value="user.id" :key="id">{{ user.name }}
                     </md-option>
                 </md-select>
             </md-input-container>
@@ -336,7 +336,7 @@ Usage: <sage-create-job> </sage-create-job>
             </md-input-container>
 
             <md-list class="height-400 md-triple-line">
-                <md-list-item v-for="(freelancer, index) in freelancers">
+                <md-list-item v-for="(freelancer, index) in freelancers" :key="index">
 
                     <img :src="freelancer.avatar" class="img-thumbnail margin-10" style="width: 70px; height: 70px;">
 

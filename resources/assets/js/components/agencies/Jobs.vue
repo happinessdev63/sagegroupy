@@ -83,7 +83,7 @@
         </div>
 
         <md-list class="custom-list md-triple-line margin-top-20" v-if="!state.loading">
-            <md-list-item v-for="(job, key, index) in shared.jobs" v-if="job.completed != 1 ">
+            <md-list-item v-for="(job, key, index) in shared.jobs" v-if="job.completed != 1 " :key="index">
                 <md-icon class="font-size-40">
                     assignment
                 </md-icon>
@@ -133,7 +133,7 @@
 
             <!-- Completed Jobs -->
             <div v-if="!state.loading">
-                <md-list-item v-for="(job, key, index) in shared.jobs" v-if="job.completed == 1 ">
+                <md-list-item v-for="(job, key, index) in shared.jobs" v-if="job.completed == 1 " :key="index">
                     <md-icon class="font-size-40">
                         assignment_turned_in
                     </md-icon>

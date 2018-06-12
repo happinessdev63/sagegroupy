@@ -67,7 +67,7 @@
                 </md-table-header>
 
                 <md-table-body>
-                    <md-table-row v-for="(agency, key, index) in allAgencies">
+                    <md-table-row v-for="(agency, key, index) in allAgencies" :key="index">
                         <md-table-cell>
                             <md-icon class="font-size-30 text-muted">
                                 card_membership

@@ -124,7 +124,8 @@
                                        value="any" >Any Level
                             </md-option>
                             <md-option v-for="(level,id) in shared.defaultSkill.avg_rates"
-                                       :value="level.level" v-if="level.level != 'Total'">{{ level.level }}
+                                       :value="level.level" v-if="level.level != 'Total'"
+                                       :key="id">{{ level.level }}
                             </md-option>
                         </md-select>
                     </div>

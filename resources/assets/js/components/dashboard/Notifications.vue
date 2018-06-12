@@ -114,8 +114,8 @@
                         </md-table-row>
                     </md-table-header>
 
-                    <md-table-body v-for="(group,groupIndex) in shared.notifications">
-                        <md-table-row v-for="(notification,index) in group" v-if="index == 0 || expandedGroup == index || notification.label != 'User'">
+                    <md-table-body v-for="(group,groupIndex) in shared.notifications" :key="groupIndex">
+                        <md-table-row v-for="(notification,index) in group" v-if="index == 0 || expandedGroup == index || notification.label != 'User'" :key="index">
                             <md-table-cell>
                                 <div>
                                     <md-icon class="font-size-30 text-muted margin-bottom-10">

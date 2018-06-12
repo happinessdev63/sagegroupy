@@ -1,7 +1,7 @@
 <template>
     <div>
         <md-list class="custom-list md-triple-line">
-            <md-list-item v-for="(job,index) in shared.jobs">
+            <md-list-item v-for="(job,index) in shared.jobs" :key="index">
                 <div v-if="primaryImageLink(job)" class="margin-right-20">
                     <img :src="primaryImageLink(job)" class="img-thumbnail" width="80" height="80" alt="Primary Image">
                 </div>

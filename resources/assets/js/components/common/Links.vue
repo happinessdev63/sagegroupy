@@ -5,7 +5,7 @@
             <h4>Links & Additional Profiles</h4>
             <hr class="green-hr margin-top-5"/>
             <md-list v-if="links.length > 0" class="custom-list md-dense">
-                <md-list-item v-for="(link,index) in links">
+                <md-list-item v-for="(link,index) in links" :key="index">
 
                     <md-icon class="font-size-40">
                         bookmark
@@ -36,7 +36,7 @@
             <hr class="green-hr margin-top-5"/>
             <!-- Recommendations -->
             <md-list class="custom-list md-dense" v-if="shared.profile.recommended_users.length > 0 || shared.profile.recommendations.length > 0">
-                <md-list-item v-for="user in shared.profile.recommended_users">
+                <md-list-item v-for="user in shared.profile.recommended_users" :key="user">
 
                     <img :src="user.freelancer.avatar" class="img-thumbnail margin-right-10" style="width: 45px; height: 45px;">
 
@@ -51,7 +51,7 @@
                     </div>
                     <md-divider class="md-inset"></md-divider>
                 </md-list-item>
-                <md-list-item v-for="user in shared.profile.recommendations">
+                <md-list-item v-for="user in shared.profile.recommendations" :key="user">
 
                     <img :src="user.freelancer.avatar" class="img-thumbnail margin-right-10" style="width: 45px; height: 45px;">
 

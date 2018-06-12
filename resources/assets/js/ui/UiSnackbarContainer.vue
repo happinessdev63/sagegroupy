@@ -12,6 +12,7 @@
 
             v-for="(snackbar, index) in queue"
             v-show="snackbar.show"
+            :key="index"
         >
             <div v-html="snackbar.message" v-if="allowHtml"></div>
         </ui-snackbar>

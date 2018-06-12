@@ -9,7 +9,7 @@
                 <md-input-container>
                     <label>Select an Agency</label>
                 <md-select required v-model="invite.agency_id" placeholder="Please select an agency.">
-                    <md-option v-for="agency in user.owned_agencies" :value="agency.id">{{ agency.name }}</md-option>
+                    <md-option v-for="agency in user.owned_agencies" :value="agency.id" :key="agency">{{ agency.name }}</md-option>
                 </md-select>
                 </md-input-container>
             </div>
