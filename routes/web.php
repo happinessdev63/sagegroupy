@@ -89,5 +89,3 @@ Route::get( '/userAgencies', 'AgenciesController@userAgencies' )->middleware( [ 
 Route::get( '/agencies/edit/{agency}', 'AgenciesController@edit' )->middleware( [ 'auth' ] );
 Route::get( '/agencies/createReference/{agency}', 'JobsController@createAgencyReference' )->middleware( [ 'auth' ] );
 Route::get( '/agency/{agency}', 'AgenciesController@index' )->middleware( [ 'auth' ] );
-
-

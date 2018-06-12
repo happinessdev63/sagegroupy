@@ -20,12 +20,13 @@ class AuthController extends Controller
             'password' => 'required',
         ] );
 
-        if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
+        if ( Auth::attempt( [ 'email' => $request->input('email'), 'password' => $request->input('password')]) ) {
             return response()->json( [
                 'status'   => 'success',
                 'message'  => "Login Successful",
                 'redirect' => $request->has("redirect") && !empty($request->redirect) ? $request->redirect : $this->defaultRedirect
             ] );
+            var_dump("OK");exit();
         }
 
         /* Invalid login, return 422 response */
