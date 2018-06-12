@@ -13,7 +13,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             <md-input type="text" required  v-model="form.name"></md-input>
             <span v-if="errors.name" class="md-error">{{ errors.name[0] }}</span>
         </md-input-container>
-        
+
         <md-input-container v-bind:class="{ 'md-input-invalid' : errors.email  }">
             <label>Email</label>
             <md-input type="text" required  v-model="form.email"></md-input>
@@ -80,6 +80,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             register: function () {
                 this.errors = {}
                 this.state.loggingIn = true;
+
                 this.$http.post('/apiv1/register', this.form).then((response) => {
                     console.log(response);
                     this.state.loggingIn = false;

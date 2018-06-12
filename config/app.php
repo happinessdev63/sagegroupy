@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'SageGroupy',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,11 @@ return [
         /*
          * Package Service Providers...
          */
+        GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
+        Plank\Mediable\MediableServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -158,8 +163,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-
+        App\Providers\RouteServiceProvider::class
     ],
 
     /*
@@ -191,9 +195,12 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
+        'MediaUploader' => Plank\Mediable\MediaUploaderFacade::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,

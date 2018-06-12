@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use App\Skill;
 
 class AuthController extends Controller
 {
@@ -20,16 +21,16 @@ class AuthController extends Controller
             'password' => 'required',
         ] );
 
-        if ( Auth::attempt( [ 'email' => $request->input('email'), 'password' => $request->input('password')]) ) {
+        if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
             return response()->json( [
                 'status'   => 'success',
                 'message'  => "Login Successful",
                 'redirect' => $request->has("redirect") && !empty($request->redirect) ? $request->redirect : $this->defaultRedirect
             ] );
-            var_dump("OK");exit();
         }
 
-        /* Invalid login, return 422 response */
+        //
+        // /* Invalid login, return 422 response */
         return response()->json( [
             'login'  => Array( "Invalid username or password." ),
             'status' => "error"

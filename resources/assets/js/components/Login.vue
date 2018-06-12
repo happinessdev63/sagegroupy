@@ -65,9 +65,9 @@ Properties: redirect-url [Where to redirect after a successful login]
                 this.state.loggingIn = true;
 
                 this.$http.post('/apiv1/login', this.form).then((response) => {
-                    console.log(response);
+                    console.log(response.body.redirect);
                     this.state.loggingIn = false;
-                    // window.location = response.body.redirect;
+                    window.location = response.body.redirect;
                 }, (response) => {
                     console.log(response);
                     this.state.loggingIn = false;
