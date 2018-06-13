@@ -38,12 +38,11 @@ class RegisterController extends Controller
 
     protected function registered( Request $request, $user )
     {
-        var_dump($user);exit("OK");
-        // return response()->json( [
-        //     'status'   => 'success',
-        //     'message'  => "Registration Successful",
-        //     'redirect' => $request->has( "redirect" ) && !empty( $request->redirect ) ? $request->redirect : $this->redirectTo
-        // ] );
+        return response()->json( [
+            'status'   => 'success',
+            'message'  => "Registration Successful",
+            'redirect' => $request->has( "redirect" ) && !empty( $request->redirect ) ? $request->redirect : $this->redirectTo
+        ] );
     }
 
     /**

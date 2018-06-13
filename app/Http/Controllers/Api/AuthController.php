@@ -20,13 +20,14 @@ class AuthController extends Controller
             'email'    => 'required',
             'password' => 'required',
         ] );
-
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
+          // redirect($this->defaultRedirect);
             return response()->json( [
                 'status'   => 'success',
                 'message'  => "Login Successful",
                 'redirect' => $request->has("redirect") && !empty($request->redirect) ? $request->redirect : $this->defaultRedirect
             ] );
+
         }
 
         //
