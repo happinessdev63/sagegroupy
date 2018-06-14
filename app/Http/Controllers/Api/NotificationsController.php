@@ -289,6 +289,7 @@ class NotificationsController extends Controller
         $notification = Notification::with( "sender", "receiver", "agency", "fromAgency", "job")->where( "id", $notification->id )->first();
         $notificationData = $notification->toArray();
 
+        dd("OK-notification");die();
         return response()->json( [
             'message' => "Notification loaded for editing.",
             'status'  => "success",
@@ -723,4 +724,3 @@ class NotificationsController extends Controller
     }
 
 }
-
