@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Skill;
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
 {
+    // use AuthenticatesUsers;
 
     protected $defaultRedirect = "/";
 
@@ -20,14 +22,15 @@ class AuthController extends Controller
             'email'    => 'required',
             'password' => 'required',
         ] );
+
         if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
-          // redirect($this->defaultRedirect);
+          // print_r(Auth()->getSession()->all());
+            // return redirect('/dashboard');
             return response()->json( [
                 'status'   => 'success',
                 'message'  => "Login Successful",
                 'redirect' => $request->has("redirect") && !empty($request->redirect) ? $request->redirect : $this->defaultRedirect
-            ] );
-
+            ]);
         }
 
         //
@@ -38,6 +41,5 @@ class AuthController extends Controller
         ],
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
-
     }
 }

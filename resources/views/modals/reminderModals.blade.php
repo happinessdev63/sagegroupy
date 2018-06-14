@@ -13,7 +13,7 @@
             Create an Agency
         </md-button>
         <md-button href="agencies" class="md-primary md-raised md-adj-width">
-            Join an Angency
+            Join an Agency
         </md-button>
     </div>
 
