@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => $data['type'],
+            'api_token' => str_random(60),
             'meta' => [
                 'first_login' => true,
                 'profile_wizard_complete' => false,
@@ -86,11 +87,9 @@ class RegisterController extends Controller
         $admin = User::where('role', 'admin')->first();
         $message = "Thank you for joining Sagegroupy! We just wanted to send you a quick welcome message to introduce you to the notifcations dashboard. We hope you enjoy our platform!";
         event( new \App\Events\UserMessageEvent( $admin, $user, 'Welcome to SageGroupy', $message, "user-message" ) );
-
         /* Send admin email */
         \Mail::to( env( "ADMIN_EMAIL" ) )
             ->send( new \App\Mail\PrelaunchAdminNotification( $data['email'], "Not Available" ) );
-
         /* Subscribe to mailchimp list */
         Newsletter::subscribe( $data['email'] );
 

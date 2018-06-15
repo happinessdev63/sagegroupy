@@ -90,7 +90,6 @@
                     'user'         => \Auth::check() ? Auth::user() : [],
                     'userShareUrl' => \Auth::check() ? Auth::user()->publicProfileUrl : 'Not Available',
                 ] ); ?>;
-        console.log(window.Laravel);
 
                 /* Data objects for the app */
 				window.sageSource = {

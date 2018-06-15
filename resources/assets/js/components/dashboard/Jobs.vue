@@ -121,7 +121,7 @@
                         </md-table-cell>
                         <md-table-cell>
                             <a :href="jobLink(job)" class="link-primary font-weight-500 font-size-14">{{ job.title }}</a> <br/>
-                            <span class="font-size-10 text-muted">{{ job.created_at }}</span>
+                            <!-- <span class="font-size-10 text-muted">{{ job.created_at }}</span> -->
                             <p>{{ job.short_description }}</p>
                         </md-table-cell>
                         <md-table-cell>

@@ -70,11 +70,11 @@ Properties: redirect-url [Where to redirect after a successful login]
                     window.location = this.redirectUrl;
                 }, (response) => {
                     this.state.loggingIn = false;
-                    // this.errors = {
-                    //   "login":["Invalid username or password."],
-                    //   "status":"error"
-                    // };
-                    this.error = response.body;
+                    this.errors = {
+                      "login":["Invalid username or password."],
+                      "status":"error"
+                    };
+                    // this.error = response.body;
                 });
             }
         }

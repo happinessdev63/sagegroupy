@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'remember_token' => str_random( 10 ),
             'role'           => 'admin',
             'bio'            => '<p>Sagegroupy Moderator</p>',
-            'api_token'      => str_random(10),
+            'api_token'      => str_random(60),
         ] );
 
         User::create( [
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
             'remember_token' => str_random( 10 ),
             'role'           => 'admin',
             'bio'            => 'This is awesome.',
-            'api_token'      => str_random(10),
+            'api_token'      => str_random(60),
         ] );
 
 

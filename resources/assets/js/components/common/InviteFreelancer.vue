@@ -9,7 +9,7 @@
                 <md-input-container>
                     <label>Select a Job</label>
                 <md-select required name="job_id" id="job_id" v-model="invite.job_id" placeholder="Please select a job.">
-                    <md-option v-for="job in shared.jobs" :value="job.id" :key="index">{{ job.title }}</md-option>
+                    <md-option v-for="job in shared.jobs" :value="job.id" :key="job.id">{{ job.title }}</md-option>
                 </md-select>
                 </md-input-container>
                 <md-input-container class="margin-top-20">
