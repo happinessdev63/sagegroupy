@@ -68,7 +68,7 @@ class UsersController extends Controller
 
     public function freelancerSearch( Request $request )
     {
-
+        // print_r($query);die();
         /* Return cached results if available */
         $cacheId = md5( @json_encode( $request->all() ) );
 

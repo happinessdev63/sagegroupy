@@ -503,6 +503,7 @@
             {
                 this.state.loading = true;
                 this.$http.get('/apiv1/freelancers', {params: this.options}).then((response) => {
+                    console.log(response);
                     this.shared.freelancers = response.body.data;
                     this.totalFreelancers = response.body.total;
                     this.state.loading = false;

@@ -31,19 +31,6 @@
 
 @section('content')
 
-    <div class="text-center col-lg-12 visible-sm">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Search Responsive -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6500659003306107"
-             data-ad-slot="9113811268"
-             data-ad-format="auto"></ins>
-        <script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
     <div class="col-lg-10 col-sm-12">
         <md-whiteframe md-elevation="3" class="padding-20 bg-white">
             <sage-freelancer-list ></sage-freelancer-list>
@@ -61,19 +48,6 @@
         @endif
     </div>
 
-    <div class="text-center col-lg-2 hidden-sm">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Search Responsive -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6500659003306107"
-             data-ad-slot="9113811268"
-             data-ad-format="auto"></ins>
-        <script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
 @endsection
 
 @section('first-scripts')
@@ -81,7 +55,7 @@
     <script>
 		var addthis_share = {
 			url: "{{ url('/job/' . $job->id) }}",
-			title: "New Job On SageGroupy - {{ str_replace("\"","",@json_encode($job->title)) }}",
+			title: "New Job On SageGroupy - {{ str_replace("\\","",@json_encode($job->title)) }}",
 			description: "{{ @json_encode($job->short_description) }}",
 		}
     </script>
