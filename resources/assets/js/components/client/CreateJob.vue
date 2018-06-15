@@ -22,6 +22,15 @@ Usage: <sage-create-job> </sage-create-job>
                             :queue-snackbars="queueNotifications"
                             :allowHtml="allowHtmlNotifications"
                     ></ui-snackbar-container>
+                    <md-button v-if="!this.jobData.public" class="md-primary" @click="updatePublic()">
+                        <md-icon>visibility</md-icon>
+                        public
+                    </md-button>
+
+                    <md-button v-if="this.jobData.public" class="md-primary" @click="updatePublic()">
+                        <md-icon>visibility_off</md-icon>
+                        private
+                    </md-button>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -184,7 +193,8 @@ Usage: <sage-create-job> </sage-create-job>
                     title: '',
                     description: '',
                     'payment_terms': '',
-                    files: []
+                    files: [],
+                    public: true,
                 },
                 selectedFile: {},
                 notifyPosition: 'right',
@@ -201,6 +211,9 @@ Usage: <sage-create-job> </sage-create-job>
             }
         },
         methods: {
+            updatePublic() {
+              this.jobData.public = !this.jobData.public;
+            },
             updateDescription(html) {
                 this.jobData.description = html;
             },
@@ -209,6 +222,7 @@ Usage: <sage-create-job> </sage-create-job>
                     this.state.saving = false;
                     this.jobData = response.body.results;
                     this.description = this.jobData.description;
+                    this.showJob = this.jobData.public;
                     this.$root.showNotification(response.body.message);
                 }, (response) => {
                     this.state.saving = false;
