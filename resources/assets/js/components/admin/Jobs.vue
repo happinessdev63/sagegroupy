@@ -8,44 +8,44 @@
                 :queue-snackbars="queueNotifications"
                 :allowHtml="allowHtmlNotifications"
         ></ui-snackbar-container>
+        <div class="pull-right">
+          <md-toolbar>
+              <h1 class="md-title text-black">Jobs (Found {{ totalJobs }})</h1>
+              <md-menu md-size="4">
+                  <md-button class="md-primary md-icon-button" md-menu-trigger>
+                      <md-icon>filter_list</md-icon>
+                  </md-button>
 
-        <md-toolbar>
-            <h1 class="md-title">Jobs</h1>
-            <md-menu md-size="4">
-                <md-button class="md-icon-button" md-menu-trigger>
-                    <md-icon>filter_list</md-icon>
-                </md-button>
+                  <md-menu-content class="md-primary">
+                      <md-menu-item @selected="onFilter" >
+                          <span id="filter-active">In Progress</span>
+                      </md-menu-item>
 
-                <md-menu-content>
-                    <md-menu-item @selected="onFilter" >
-                        <span id="filter-active">In Progress</span>
-                    </md-menu-item>
+                      <md-menu-item @selected="onFilter" >
+                          <span id="filter-completed">Completed</span>
+                      </md-menu-item>
 
-                    <md-menu-item @selected="onFilter" >
-                        <span id="filter-completed">Completed</span>
-                    </md-menu-item>
+                      <md-menu-item @selected="onFilter">
+                          <span id="filter-standard">Standard Jobs</span>
+                      </md-menu-item>
 
-                    <md-menu-item @selected="onFilter">
-                        <span id="filter-standard">Standard Jobs</span>
-                    </md-menu-item>
+                      <md-menu-item @selected="onFilter" >
+                          <span id="filter-reference">Reference Jobs</span>
+                      </md-menu-item>
 
-                    <md-menu-item @selected="onFilter" >
-                        <span id="filter-reference">Reference Jobs</span>
-                    </md-menu-item>
-                    
-                    <md-menu-item>
-                        <span>More Later...</span>
-                    </md-menu-item>
+                      <md-menu-item>
+                          <span>More Later...</span>
+                      </md-menu-item>
 
-                </md-menu-content>
-            </md-menu>
+                  </md-menu-content>
+              </md-menu>
 
 
-            <md-button class="md-icon-button" @click="refreshTable()">
+            <md-button class="md-primary md-icon-button" @click="refreshTable()">
                 <md-icon>cached</md-icon>
             </md-button>
 
-            <md-button v-if="isFiltered" class="md-icon-button" @click="clearFilters">
+            <md-button v-if="isFiltered" class="md-primary md-icon-button" @click="clearFilters">
                 <md-icon>clear</md-icon>
             </md-button>
 
@@ -53,19 +53,18 @@
                 <md-input-container md-inline>
                     <label>Search Jobs</label>
                     <md-input v-model="options.search" @change="onSearch"></md-input>
-                    <md-button  class="md-input-button" @click="state.searchSelected = !state.searchSelected">
+                    <md-button  class="md-primary md-input-button" @click="state.searchSelected = !state.searchSelected">
                         <md-icon>search</md-icon>
                     </md-button>
                 </md-input-container>
             </div>
 
-            <md-button v-if="!state.searchSelected" class="md-icon-button" @click="state.searchSelected = !state.searchSelected">
-                <md-icon>search</md-icon>
+            <md-button v-if="!state.searchSelected" class="md-primary md-icon-button" @click="state.searchSelected = !state.searchSelected">
+                  <md-icon>search</md-icon>
             </md-button>
 
-
-
-        </md-toolbar>
+          </md-toolbar>
+        </div>
 
         <md-table-alternate-header md-selected-label="selected">
             <md-button class="md-icon-button">
@@ -140,12 +139,12 @@
                         <span>
                             {{ job.created_at }}
                         </span>
-
+                        
                         <md-button target="blank" :href="jobLink(job)" class="md-icon-button">
                         <md-icon>assignment</md-icon>
                         </md-button>
 
-                        <md-button class="md-icon-button" @click="confirmDelete(job)">
+                        <md-button v-if="user.is_admin" class="md-icon-button" @click="confirmDelete(job)">
                             <md-icon>delete</md-icon>
                         </md-button>
                     </md-table-cell>

@@ -30,23 +30,41 @@
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col-lg-12 col-sm-12 padding-bottom-20 tour-agencies" id='search_option'>
+      <md-whiteframe md-elevation="3" class="padding-4 bg-white">
+        <!-- <div class="text-black font-weight-400">
+            <label class="md-title md-primary">Search for </label>
+            <md-radio class="md-primary" v-model="type1" id="type1" name="type1" md-value="freelancer">Freelancer</md-radio>
+            <md-radio class="md-primary" v-model="type2" id="type2" name="type1" md-value="client">Client</md-radio>
+            <md-radio class="md-primary" v-model="type3" id="type3" name="type1" md-value="client_freelancer">Both</md-radio>
+        </div> -->
+        <md-tabs>
+          <md-tab id="freelancer" md-label="Freelancer" md-icon="perm_contact_calendar">
+            <div>
+                <sage-freelancer-list ></sage-freelancer-list>
+            </div>
+          </md-tab>
+          <md-tab id="job" md-label="Job" md-icon="work">
+            <div>
+                <sage-admin-jobs ref="admin-users"></sage-admin-jobs>
+            </div>
+          </md-tab>
+        </md-tabs>
+        <div class="clearfix"></div>
+      </md-whiteframe>
 
-    <div class="col-lg-10 col-sm-12">
-        <md-whiteframe md-elevation="3" class="padding-20 bg-white">
-            <sage-freelancer-list ></sage-freelancer-list>
-
-            <div class="clearfix"></div>
-        </md-whiteframe>
-        @if (\Request::get('intent') == 'newJob' && Request::has('jobId') && $job instanceof \App\Job)
-        <md-button class="margin-top-10 addthis_button md-primary md-raised shareButton"
-                   data-url="{{ url('/job/' . $job->id) }}"
-                   data-title="New Job On SageGroupy - {{ $job->title }}"
-                   data-description="{{ $job->short_description }}">
-            <i class="md-icon material-icons site-menu-icon md-theme-default">share</i>
-            Share Your Job
-        </md-button>
-        @endif
+      @if (\Request::get('intent') == 'newJob' && Request::has('jobId') && $job instanceof \App\Job)
+      <md-button class="margin-top-10 addthis_button md-primary md-raised shareButton"
+                 data-url="{{ url('/job/' . $job->id) }}"
+                 data-title="New Job On SageGroupy - {{ $job->title }}"
+                 data-description="{{ $job->short_description }}">
+          <i class="md-icon material-icons site-menu-icon md-theme-default">share</i>
+          Share Your Job
+      </md-button>
+      @endif
     </div>
+</div>
 
 @endsection
 

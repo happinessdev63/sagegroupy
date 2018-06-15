@@ -433,7 +433,7 @@
             <script src="/js/plugins/jquery.fancybox.min.js"></script>
             <script src="/js/plugins/product-tour.min.js"></script>
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58f7a8bf66ec9acf"></script>
-            <script>
+            <!-- <script>
                 (function (i, s, o, g, r, a, m) {
                     i['GoogleAnalyticsObject'] = r;
                     i[r] = i[r] || function () {
@@ -447,7 +447,7 @@
                 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
                 ga('create', 'UA-84063026-1', 'auto');
                 ga('send', 'pageview');
-            </script>
+            </script> -->
             <script>
 				var vmBus = window.appBus;
 				window.addthis.addEventListener('addthis.user.clickback', function (event) {

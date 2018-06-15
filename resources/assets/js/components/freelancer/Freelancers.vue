@@ -1,8 +1,10 @@
 <template>
     <div>
-        <h4 class="pull-left">Search For Freelancers (Found {{ shared.freelancers.length }})</h4>
+        <!-- <h4 class="pull-left">Search For Freelancers (Found {{ shared.freelancers.length }})</h4> -->
+      <md-table-card>
         <div class="pull-right">
-
+          <md-toolbar>
+            <h1 class="md-title text-black">Freelancers (Found {{ shared.freelancers.length }})</h1>
             <md-button class="md-icon-button md-primary" @click="refreshFreelancers()">
                 <md-icon>cached</md-icon>
             </md-button>
@@ -50,7 +52,7 @@
             </md-menu>
             -->
 
-
+          </md-toolbar>
         </div>
 
         <div class="clearfix"></div>
@@ -276,6 +278,7 @@
 
         </md-list>
         <div class="clearfix"></div>
+      </md-table-card>
 
     </div>
 </template>
