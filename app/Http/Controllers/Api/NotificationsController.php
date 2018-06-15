@@ -10,13 +10,14 @@ use App\Notification;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class NotificationsController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware( "auth" )->except("fetch");
+        $this->middleware( "auth:api" )->except("fetch");
     }
 
     /**
@@ -27,8 +28,7 @@ class NotificationsController extends Controller
      */
     public function index( Request $request )
     {
-
-      dd(Auth::user()); return;
+        // dd(Auth::guard('api')->user());die();
         $query = Notification::with( "sender", "receiver", "agency", "fromAgency", "job" );
 
         /* Handle custom sorting on relations */
@@ -144,7 +144,7 @@ class NotificationsController extends Controller
                     $query->where( "status", "archived" );
                     break;
                 case "filter-sent":
-                    $query->where( "from_user_id", \Auth::user()->id );
+                    $query->where( "from_user_id", \Auth::guard('api')->user()->id );
                     break;
             }
         }
@@ -239,7 +239,7 @@ class NotificationsController extends Controller
      */
     public function sendBulkMessages( Request $request )
     {
-        if (!\Auth::user()->isAdmin()) {
+        if (!\Auth::guard('api')->user()->isAdmin()) {
             return response()->json( [
                 'message' => "You do not have permission to perform this action.",
                 'status'  => "error"
@@ -268,7 +268,7 @@ class NotificationsController extends Controller
         }
 
         foreach ($users as $user) {
-            event( new \App\Events\UserMessageEvent( \Auth::user(), $user, $request->title, $request->message, "user-message" ) );
+            event( new \App\Events\UserMessageEvent( \Auth::guard('api')->user(), $user, $request->title, $request->message, "user-message" ) );
         }
 
 
@@ -390,7 +390,7 @@ class NotificationsController extends Controller
         ] );
 
         $admin = \App\User::where('role','admin')->orderBy('id','ASC')->first();
-        $user = \Auth::user();
+        $user = \Auth::guard('api')->user();
 
         /* Send feedback email to admin */
         $admin->notify( new \App\Notifications\UserFeedbackMessage( $user, $request->message) );
@@ -415,7 +415,7 @@ class NotificationsController extends Controller
             'friendInvites' => 'required|array',
         ] );
 
-        $user = \Auth::user();
+        $user = \Auth::guard('api')->user();
         foreach ($request->friendInvites as $friend) {
             if ( !filter_var( $friend['email'], FILTER_VALIDATE_EMAIL ) ) {
                 continue;
@@ -676,7 +676,7 @@ class NotificationsController extends Controller
      */
     public function markAllRead( Request $request )
     {
-        if (!\Auth::user()) {
+        if (!\Auth::guard('api')->user()) {
             return response()->json( [
                 'message' => "Error updating notifications.",
                 'status'  => "error"
@@ -685,7 +685,7 @@ class NotificationsController extends Controller
             );
         }
 
-        Notification::where("owner_id",\Auth::user()->id)->where("status","unread")->update(['status' => 'read']);
+        Notification::where("owner_id",\Auth::guard('api')->user()->id)->where("status","unread")->update(['status' => 'read']);
 
         return response()->json( [
             'message' => "All notifications have been marked as read.",

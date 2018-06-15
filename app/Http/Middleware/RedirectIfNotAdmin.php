@@ -17,7 +17,7 @@ class RedirectIfNotAdmin
     {
 
         if (!$request->user()->isAdmin()) {
-            // return redirect("/unauthenticated");
+            return redirect("/unauthenticated");
         }
 
         return $next($request);

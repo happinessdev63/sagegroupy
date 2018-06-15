@@ -21,7 +21,7 @@ class SkillsController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch");
+        $this->middleware( "auth:api" )->except("fetch");
     }
 
     /**
@@ -105,7 +105,7 @@ class SkillsController extends Controller
     public function removeSkill(Request $request, Skill $skill) {
 
         /* Remove the skill from the user */
-        \Auth::user()->skills()->detach($skill->id);
+        \Auth::guard('api')->user()->skills()->detach($skill->id);
 
         /**
          * @todo - Potentially delete skill if no more users are associated with it?
@@ -140,7 +140,7 @@ class SkillsController extends Controller
         $skill = Skill::firstOrCreate(["slug" => $newSkill['slug']], $newSkill);
 
         /* If freelancer has skill update pivot, otherwise attach new skill and save pivot data */
-        $userWithSkills = \App\User::where('id', \Auth::user()->id)
+        $userWithSkills = \App\User::where('id', \Auth::guard('api')->user()->id)
                     ->whereHas( 'skills', function ( $query ) use ($skill) {
                         $query->where( 'skill_id', $skill->id  );
                      } )->with('skills')->first();
@@ -162,7 +162,7 @@ class SkillsController extends Controller
         }
 
         /* Make sure user hasn't added more than 12 skills */
-        $userSkills = \App\User::where( "id", \Auth::user()->id )->withCount( "skills" )->first();
+        $userSkills = \App\User::where( "id", \Auth::guard('api')->user()->id )->withCount( "skills" )->first();
         if ( $userSkills->skills_count >= $settings->get("max_skills", 12) ) {
             return response()->json( [
                 'message'     => "This skill was not saved. You have added the maximum number of skills.",
@@ -178,7 +178,7 @@ class SkillsController extends Controller
         $suggestions = $this->getSkillSuggestions( $skill, $request->rate, $request->level );
 
         /* No skill added yet, add new skill and relation */
-        \Auth::user()->skills()->syncWithoutDetaching( [ $skill->id => [
+        \Auth::guard('api')->user()->skills()->syncWithoutDetaching( [ $skill->id => [
             'rate'       => $request->rate,
             'level'      => $request->level,
             'experience' => $request->experience
@@ -201,7 +201,7 @@ class SkillsController extends Controller
      * @internal param int $experience
      */
     public function getSkillSuggestions(Skill $skill, $rate, $skillLevel) {
-        $avgRate = $skill->averageRateByLevel( $skillLevel, \Auth::user()->id );
+        $avgRate = $skill->averageRateByLevel( $skillLevel, \Auth::guard('api')->user()->id );
         return $skill->skillSuggestions($rate, $avgRate);
     }
 
@@ -259,4 +259,3 @@ class SkillsController extends Controller
     }
 
 }
-

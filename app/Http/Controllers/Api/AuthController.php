@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password' => 'required',
         ] );
 
-        if ( Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
+        if (Auth::attempt( [ 'email' => $request->email, 'password' => $request->password ] ) ) {
           // print_r(Auth()->getSession()->all());
             // return redirect('/dashboard');
             return response()->json( [

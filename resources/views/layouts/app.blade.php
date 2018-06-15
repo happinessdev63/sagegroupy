@@ -85,10 +85,12 @@
             <script>
 				window.Laravel = <?php echo json_encode( [
                     'csrfToken'    => csrf_token(),
+                    'apiToken'     => Auth::user()->api_token ?? null,
                     '_token'       => csrf_token(),
                     'user'         => \Auth::check() ? Auth::user() : [],
                     'userShareUrl' => \Auth::check() ? Auth::user()->publicProfileUrl : 'Not Available',
                 ] ); ?>;
+        console.log(window.Laravel);
 
                 /* Data objects for the app */
 				window.sageSource = {

@@ -17,7 +17,7 @@ class JobsController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch","index");
+        $this->middleware( "auth:api" )->except("fetch","index");
     }
 
     /**
@@ -732,4 +732,3 @@ class JobsController extends Controller
 
 
 }
-

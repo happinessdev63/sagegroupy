@@ -206,7 +206,7 @@
 			this.options.owner = this.user.id;
 			this.owner = this.user.id;
 			if (this.user.id) {
-				// this.refreshNotifications();
+				this.refreshNotifications();
             }
 
 		},
@@ -483,22 +483,22 @@
 					this.state.loading = true;
 				}
 
-				// this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
-				// 	if (this.options.paginate) {
-				// 		this.shared.sidebarNotifications = response.body.data;
-				// 		this.totalNotifications = response.body.total;
-				// 	} else {
-				// 		this.shared.sidebarNotifications = response.body;
-				// 		this.totalNotifications = this.shared.notifications.length;
-				// 	}
-        //
-				// 	this.state.loading = false;
-        //
-				// }, (response) => {
-				// 	this.$root.showNotification(response.body.message);
-				// 	console.log("Error loading notifications");
-				// 	console.log(response);
-				// });
+				this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
+					if (this.options.paginate) {
+						this.shared.sidebarNotifications = response.body.data;
+						this.totalNotifications = response.body.total;
+					} else {
+						this.shared.sidebarNotifications = response.body;
+						this.totalNotifications = this.shared.notifications.length;
+					}
+
+					this.state.loading = false;
+
+				}, (response) => {
+					this.$root.showNotification(response.body.message);
+					console.log("Error loading notifications");
+					console.log(response);
+				});
 			}
 		}
 	}

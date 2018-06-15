@@ -18,7 +18,8 @@ class UsersTableSeeder extends Seeder
             'password'       => bcrypt( 'xhmn7081pkLuJ!' ),
             'remember_token' => str_random( 10 ),
             'role'           => 'admin',
-            'bio'            => '<p>Sagegroupy Moderator</p>'
+            'bio'            => '<p>Sagegroupy Moderator</p>',
+            'api_token'      => str_random(10),
         ] );
 
         User::create( [
@@ -27,7 +28,8 @@ class UsersTableSeeder extends Seeder
             'password'       => bcrypt( 'admin123' ),
             'remember_token' => str_random( 10 ),
             'role'           => 'admin',
-            'bio'            => 'This is awesome.'
+            'bio'            => 'This is awesome.',
+            'api_token'      => str_random(10),
         ] );
 
 

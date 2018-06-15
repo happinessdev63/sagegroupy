@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->enum("role",['client','admin','freelancer','client_freelancer']);
             $table->rememberToken();
             $table->timestamps();
+            $table->string('api_token')->unique();
         });
     }
 

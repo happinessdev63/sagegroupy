@@ -17,7 +17,7 @@ class AgenciesController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch");
+        $this->middleware( "auth:api" )->except("fetch");
     }
 
     /**
@@ -84,7 +84,7 @@ class AgenciesController extends Controller
         if ( $request->has( "filter" ) && !empty( $request->filter ) ) {
             switch ($request->filter) {
                 case "filter-own-agencies":
-                    $query->where( "owner_id", \Auth::user()->id );
+                    $query->where( "owner_id", \Auth::guard('api')->user()->id );
                     break;
                 case "filter-members":
                     $query->has("freelancers");
@@ -93,7 +93,7 @@ class AgenciesController extends Controller
                     $query->doesntHave( "freelancers" );
                     break;
                 case "filter-eligible-agencies":
-                    $query->where( "owner_id", "!=", \Auth::user()->id );
+                    $query->where( "owner_id", "!=", \Auth::guard('api')->user()->id );
                     break;
             }
         }
@@ -108,7 +108,7 @@ class AgenciesController extends Controller
      */
     public function create( Request $request )
     {
-        if ( !\Auth::user()->isFreelancer&& !\Auth::user()->isAdmin() ) {
+        if ( !\Auth::guard('api')->user()->isFreelancer&& !\Auth::guard('api')->user()->isAdmin() ) {
             return response()->json( [
                 'message' => "Only freelancers can create new agencies.",
                 'status'  => "error"
@@ -151,7 +151,7 @@ class AgenciesController extends Controller
         $newAgency['type'] = "standard";
         $newAgency['status'] = "active";
 
-        $agency = \Auth::user()->ownedAgencies()->create($newAgency);
+        $agency = \Auth::guard('api')->user()->ownedAgencies()->create($newAgency);
         $agency->attachMediaExtra( $fileIds, "files", $fileAttributes );
 
         $agency = Agency::with( "owner", "freelancers" )->where( "id", $agency->id )->first();
@@ -174,7 +174,7 @@ class AgenciesController extends Controller
      */
     public function createReference( Request $request )
     {
-        if ( !\Auth::user()->isFreelancer && !\Auth::user()->isAdmin() ) {
+        if ( !\Auth::guard('api')->user()->isFreelancer && !\Auth::user()->isAdmin() ) {
             return response()->json( [
                 'message' => "Only freelancers can create reference jobs.",
                 'status'  => "error"
@@ -602,4 +602,3 @@ class AgenciesController extends Controller
 
 
 }
-

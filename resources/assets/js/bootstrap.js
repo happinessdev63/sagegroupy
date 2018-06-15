@@ -39,13 +39,25 @@ require('vue-resource');
 // } else {
 //     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 // }
+//
+// axios.defaults.headers.common = {
+//     'X-CSRF-TOKEN': Laravel.csrfToken,
+//     'X-Requested-With': 'XMLHttpRequest',
+//     'Authorization': 'Bearer ' + Laravel.apiToken,
+// };
+
+// window.Vue.prototype.$http = axios;
+
 Vue.http.interceptors.push((request, next) => {
     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    request.headers.set('X-Requested-With', 'XMLHttpRequest');
+    request.headers.set('Authorization', 'Bearer ' + Laravel.apiToken);
 
     /* If user is logged out during ajax request, force a page reresh */
     next((response) => {
 
         if (response.status === 401) {
+          // console.log('ppppppp error 401 unauthenticated');
             window.location.reload(true);
         }
 

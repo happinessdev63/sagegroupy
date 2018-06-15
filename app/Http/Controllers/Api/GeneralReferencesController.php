@@ -17,7 +17,7 @@ class GeneralReferencesController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch","index");
+        $this->middleware( "auth:api" )->except("fetch","index");
     }
 
     /**
@@ -87,7 +87,7 @@ class GeneralReferencesController extends Controller
      */
     public function create( Request $request )
     {
-        if ( !\Auth::user()->is_freelancer && !\Auth::user()->isAdmin() ) {
+        if ( !\Auth::guard('api')->user()->is_freelancer && !\Auth::guard('api')->user()->isAdmin() ) {
             return response()->json( [
                 'message' => "Only freelancers can create new references.",
                 'status'  => "error"
@@ -134,7 +134,7 @@ class GeneralReferencesController extends Controller
         $newGeneralReference['status'] = "active";
         $newGeneralReference['type'] = $request->type;
 
-        $generalReference = \Auth::user()->generalReferences()->create( $newGeneralReference );
+        $generalReference = \Auth::guard('api')->user()->generalReferences()->create( $newGeneralReference );
         $generalReference->attachMediaExtra( $fileIds, "files", $fileAttributes );
 
         /* Send client reference request if this is a general reference and not an imported reference */
@@ -143,7 +143,7 @@ class GeneralReferencesController extends Controller
                 'email' => $request->client_email
             ] );
 
-            event( new \App\Events\GeneralReferenceRequestEvent( $generalReference, $client, \Auth::user(), $request->client_message ) );
+            event( new \App\Events\GeneralReferenceRequestEvent( $generalReference, $client, \Auth::guard('api')->user(), $request->client_message ) );
         }
 
 
@@ -196,8 +196,8 @@ class GeneralReferencesController extends Controller
     public function update( Request $request, GeneralReference $generalReference )
     {
         $canEdit = false;
-        if (\Auth::user()->id == $generalReference->user_id
-            || \Auth::user()->isAdmin()
+        if (\Auth::guard('api')->user()->id == $generalReference->user_id
+            || \Auth::guard('api')->user()->isAdmin()
         ) {
             $canEdit = true;
         }
@@ -281,14 +281,14 @@ class GeneralReferencesController extends Controller
     public function clientFeedback( Request $request, GeneralReference $generalReference )
     {
         $canEdit = false;
-        if ( \Auth::user()->id == $generalReference->user_id
-            || \Auth::user()->isAdmin()
+        if ( \Auth::guard('api')->user()->id == $generalReference->user_id
+            || \Auth::guard('api')->user()->isAdmin()
         ) {
             $canEdit = true;
         }
 
         /* If no client is assigned the user can edit the reference */
-        if (\Auth::user() && empty($generalReference->client_id)) {
+        if (\Auth::guard('api')->user() && empty($generalReference->client_id)) {
             $canEdit = true;
         }
 
@@ -310,7 +310,7 @@ class GeneralReferencesController extends Controller
 
         $update = [
             'review'       => $request->review,
-            'client_id' => \Auth::user()->id
+            'client_id' => \Auth::guard('api')->user()->id
         ];
 
         if ( $generalReference->update( $update ) ) {
@@ -343,8 +343,8 @@ class GeneralReferencesController extends Controller
         /* Confirm user has permission to delete the generalReference */
         $canDelete= false;
         if (
-            \Auth::user()->id == $generalReference->user_id
-            || \Auth::user()->isAdmin()
+            \Auth::guard('api')->user()->id == $generalReference->user_id
+            || \Auth::guard('api')->user()->isAdmin()
         ) {
             $canDelete = true;
         }
@@ -375,4 +375,3 @@ class GeneralReferencesController extends Controller
     }
 
 }
-

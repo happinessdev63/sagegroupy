@@ -18,7 +18,7 @@ class MailLogsController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch");
+        $this->middleware( "auth:api" )->except("fetch");
     }
 
     /**
@@ -86,4 +86,3 @@ class MailLogsController extends Controller
     }
 
 }
-

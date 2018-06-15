@@ -17,7 +17,7 @@ class FilesController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" );
+        $this->middleware( "auth:api" );
     }
 
     /**
@@ -29,7 +29,7 @@ class FilesController extends Controller
     public function create( Request $request, $folder = 'jobs' )
     {
 
-        $userFilePath = \Auth::user()->filePath( $folder );
+        $userFilePath = \Auth::guard('api')->user()->filePath( $folder );
         $media = MediaUploader::fromSource( $request->file( 'file' ))
                 ->useHashForFilename()
                 ->toDirectory($userFilePath)
@@ -64,7 +64,7 @@ class FilesController extends Controller
     public function avatar( Request $request )
     {
 
-        $userFilePath = \Auth::user()->filePath( "avatar" );
+        $userFilePath = \Auth::guard('api')->user()->filePath( "avatar" );
         $media = MediaUploader::fromSource( $request->file( 'img' ) )
             ->useHashForFilename()
             ->toDirectory( $userFilePath )
@@ -73,7 +73,7 @@ class FilesController extends Controller
         if ( $media ) {
 
             /* Attach to user */
-            \Auth::user()->syncMediaExtra( $media->getKey(), "avatar", [
+            \Auth::guard('api')->user()->syncMediaExtra( $media->getKey(), "avatar", [
                 'name' => "Avatar",
                 'description' => "User avatar.",
                 'public' => true,
@@ -154,4 +154,3 @@ class FilesController extends Controller
 
 
 }
-

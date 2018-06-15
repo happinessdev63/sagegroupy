@@ -16,7 +16,7 @@ class LinksController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch","index");
+        $this->middleware( "auth:api" )->except("fetch","index");
     }
 
     /**
@@ -316,4 +316,3 @@ class LinksController extends Controller
 
 
 }
-

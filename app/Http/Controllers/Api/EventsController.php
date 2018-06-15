@@ -22,7 +22,7 @@ class EventsController extends Controller
                if ($job) {
                    event( new \App\Events\JobViewedEvent(
                        $job,
-                       \Auth::user() ?: "anon",
+                       \Auth::guard('api')->user() ?: "anon",
                        $request->get('source','sagegroupy.com'),
                        $request->get('view_type', 'view' )
                    ) );
@@ -33,7 +33,7 @@ class EventsController extends Controller
                if ( $user ) {
                    event( new \App\Events\ProfileViewedEvent(
                        $user,
-                       \Auth::user() ?: "anon",
+                       \Auth::guard('api')->user() ?: "anon",
                        $request->get( 'source', 'sagegroupy.com' ),
                        $request->get( 'view_type', 'view' )
                    ) );
@@ -45,4 +45,3 @@ class EventsController extends Controller
    }
 
 }
-

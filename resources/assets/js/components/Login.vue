@@ -63,16 +63,18 @@ Properties: redirect-url [Where to redirect after a successful login]
             login: function (event) {
                 this.errors = {}
                 this.state.loggingIn = true;
+                // alert(window.Laravel.apiToken);
                 this.$http.post('/login', this.form).then((response) => {
                   console.log(response);
                     this.state.loggingIn = false;
                     window.location = this.redirectUrl;
                 }, (response) => {
                     this.state.loggingIn = false;
-                    this.errors = {
-                      "login":["Invalid username or password."],
-                      "status":"error"
-                    };
+                    // this.errors = {
+                    //   "login":["Invalid username or password."],
+                    //   "status":"error"
+                    // };
+                    this.error = response.body;
                 });
             }
         }
