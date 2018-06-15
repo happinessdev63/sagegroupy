@@ -231,27 +231,27 @@
                 }
 
                 var numMessages = this.shared.chatMessages.length;
-                this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
-                    if (this.options.paginate) {
-                        this.shared.chatMessages = response.body.data;
-                    } else {
-                        this.shared.chatMessages = response.body;
-                    }
-
-                    this.state.loading = false;
-
-                    /* Scroll to bottom if there is a new message and on first load */
-                    if (this.shared.chatMessages.length > numMessages || numMessages == 0) {
-                        setTimeout(function () {
-                            $('#messageHolder').scrollTop($('#messageHolder')[0].scrollHeight);
-                        }, 800)
-                    }
-
-                }, (response) => {
-                    this.$root.showNotification(response.body.message);
-                    console.log("Error loading notifications");
-                    console.log(response);
-                });
+                // this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
+                //     if (this.options.paginate) {
+                //         this.shared.chatMessages = response.body.data;
+                //     } else {
+                //         this.shared.chatMessages = response.body;
+                //     }
+                //
+                //     this.state.loading = false;
+                //
+                //     /* Scroll to bottom if there is a new message and on first load */
+                //     if (this.shared.chatMessages.length > numMessages || numMessages == 0) {
+                //         setTimeout(function () {
+                //             $('#messageHolder').scrollTop($('#messageHolder')[0].scrollHeight);
+                //         }, 800)
+                //     }
+                //
+                // }, (response) => {
+                //     this.$root.showNotification(response.body.message);
+                //     console.log("Error loading notifications");
+                //     console.log(response);
+                // });
             }
         }
     }

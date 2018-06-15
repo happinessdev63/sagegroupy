@@ -60,7 +60,7 @@
                 'csrfToken' => csrf_token(),
                 '_token' => csrf_token(),
                 'user' => \Auth::check() ? Auth::user() : [],
-            ] ); ?>
+            ] ); ?>;
         </script>
         <!-- Facebook Pixel Code -->
         <script>

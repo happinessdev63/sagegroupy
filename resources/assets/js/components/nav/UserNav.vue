@@ -128,28 +128,28 @@ Properties: current-page [Declares which page should be active in navigation.]
                     return;
                 }
 
-              this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
-
-                  if (this.firstLoad) {
-                      this.originalNotifications = parseInt(response.body);
-                  }
-
-                  var newMessages = parseInt(response.body) - parseInt(this.shared.unreadNotifications);
-                  var totalNewMessages = parseInt(response.body) - this.originalNotifications;
-
-                  if (newMessages > 0 && !this.firstLoad) {
-                    document.title = "(" + totalNewMessages + ") " + this.originalTitle;
-                      var audio = new Audio('/sounds/new-message.ogg');
-                      audio.play();
-                  }
-
-                  this.shared.unreadNotifications = response.body;
-                  this.firstLoad = false;
-                  if (this.shared.unreadNotifications == 0) {
-                      document.title = this.originalTitle;
-                  }
-
-                });
+              // this.$http.get('/apiv1/notifications', {params: this.options}).then((response) => {
+              //
+              //     if (this.firstLoad) {
+              //         this.originalNotifications = parseInt(response.body);
+              //     }
+              //
+              //     var newMessages = parseInt(response.body) - parseInt(this.shared.unreadNotifications);
+              //     var totalNewMessages = parseInt(response.body) - this.originalNotifications;
+              //
+              //     if (newMessages > 0 && !this.firstLoad) {
+              //       document.title = "(" + totalNewMessages + ") " + this.originalTitle;
+              //         var audio = new Audio('/sounds/new-message.ogg');
+              //         audio.play();
+              //     }
+              //
+              //     this.shared.unreadNotifications = response.body;
+              //     this.firstLoad = false;
+              //     if (this.shared.unreadNotifications == 0) {
+              //         document.title = this.originalTitle;
+              //     }
+              //
+              //   });
             },
             goTo(location) {
             	window.location = location;

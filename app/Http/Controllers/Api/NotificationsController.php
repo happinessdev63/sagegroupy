@@ -16,7 +16,7 @@ class NotificationsController extends Controller
 
     public function __construct()
     {
-        $this->middleware( "auth" )->except("fetch");
+        // $this->middleware( "auth" )->except("fetch");
     }
 
     /**
@@ -27,6 +27,8 @@ class NotificationsController extends Controller
      */
     public function index( Request $request )
     {
+
+      dd(Auth::user()); return;
         $query = Notification::with( "sender", "receiver", "agency", "fromAgency", "job" );
 
         /* Handle custom sorting on relations */
@@ -289,7 +291,6 @@ class NotificationsController extends Controller
         $notification = Notification::with( "sender", "receiver", "agency", "fromAgency", "job")->where( "id", $notification->id )->first();
         $notificationData = $notification->toArray();
 
-        dd("OK-notification");die();
         return response()->json( [
             'message' => "Notification loaded for editing.",
             'status'  => "success",

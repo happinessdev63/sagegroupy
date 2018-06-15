@@ -336,4 +336,3 @@ const app = new Vue({
 
     }
 });
-

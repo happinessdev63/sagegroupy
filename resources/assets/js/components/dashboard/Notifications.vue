@@ -408,11 +408,11 @@
 			if (!this.options.agency) {
 				this.options.owner = this.owner;
 			}
-			this.refreshNotifications();
+			// this.refreshNotifications();
 			var vm = this;
-			this.recurringRefresh = setInterval(function () {
-				//vm.refreshNotifications(true);
-			}, 7000);
+			// this.recurringRefresh = setInterval(function () {
+			// 	//vm.refreshNotifications(true);
+			// }, 7000);
 		},
 		created() {
 

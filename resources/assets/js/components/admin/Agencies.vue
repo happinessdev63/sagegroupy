@@ -16,7 +16,7 @@
                     <md-menu-item @selected="onFilter" >
                         <span id="filter-no-members">No Members Yet (Owner Only)</span>
                     </md-menu-item>
-                    
+
                     <md-menu-item>
                         <span>More Later...</span>
                     </md-menu-item>

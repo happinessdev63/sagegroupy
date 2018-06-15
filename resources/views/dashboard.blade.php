@@ -79,16 +79,13 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center padding-bottom-20 hidden-sm">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Dashboard Responsive -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6500659003306107"
                      data-ad-slot="4599851183"
                      data-ad-format="auto"></ins>
-                <script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+
             </div>
         </div>
         <div class="row">
@@ -103,16 +100,13 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center padding-bottom-20">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
                 <!-- Dashboard Responsive -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6500659003306107"
                      data-ad-slot="4599851183"
                      data-ad-format="auto"></ins>
-                <script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
 
         </div>
@@ -194,16 +188,13 @@
     @if (Auth::user()->is_client && !Auth::user()->is_freelancer)
         <div class="row">
             <div class="col-lg-12 text-center padding-bottom-20">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Dashboard Responsive -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6500659003306107"
                      data-ad-slot="4599851183"
                      data-ad-format="auto"></ins>
-                <script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+
             </div>
         </div>
     @endif
@@ -213,6 +204,15 @@
 @endsection
 
 @section('scripts')
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+
     <script>
 		window.sageSource.user = <?php echo json_encode( $user ); ?>;
 		window.sageSource.profile = <?php echo json_encode( $user ); ?>;

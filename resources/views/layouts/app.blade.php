@@ -46,15 +46,15 @@
             @show
 
         <!-- Scripts -->
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
 				(adsbygoogle = window.adsbygoogle || []).push({
 					google_ad_client: "ca-pub-6500659003306107",
 					enable_page_level_ads: true
 				});
-            </script>
+            </script> -->
             <!-- Facebook Pixel Code -->
-            <script>
+            <!-- <script>
 				!function (f, b, e, v, n, t, s) {
 					if (f.fbq)return;
 					n = f.fbq = function () {
@@ -75,12 +75,12 @@
 					'https://connect.facebook.net/en_US/fbevents.js');
 				fbq('init', '542388909257295');
 				fbq('track', 'PageView');
-            </script>
-            <noscript>
+            </script> -->
+            <!-- <noscript>
                 <img height="1" width="1"
                      src="https://www.facebook.com/tr?id=542388909257295&ev=PageView
 &noscript=1"/>
-            </noscript>
+            </noscript> -->
             <!-- End Facebook Pixel Code -->
             <script>
 				window.Laravel = <?php echo json_encode( [

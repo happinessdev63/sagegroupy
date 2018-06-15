@@ -42,4 +42,3 @@ window.appBus = new Vue();
 const app = new Vue({
     el: '#app',
 });
-
