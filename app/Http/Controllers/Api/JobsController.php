@@ -65,8 +65,6 @@ class JobsController extends Controller
             $query->orderBy( "created_at", "desc" );
         }
 
-
-
         if ( $request->has( "pager" ) ) {
             $page = $request->pager['page'];
             $size = $request->pager['size'];
@@ -109,7 +107,11 @@ class JobsController extends Controller
                     break;
             }
         }
-
+        // print_r($request->admin);
+        if( $request->admin === 'false'){
+          $query->where("public", true);
+        }
+        
         return $query->paginate( $size );
     }
 

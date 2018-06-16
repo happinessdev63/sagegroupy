@@ -139,8 +139,8 @@
                         <span>
                             {{ job.created_at }}
                         </span>
-                        
-                        <md-button target="blank" :href="jobLink(job)" class="md-icon-button">
+
+                        <md-button v-if="user.is_admin" target="blank" :href="jobLink(job)" class="md-icon-button">
                         <md-icon>assignment</md-icon>
                         </md-button>
 
@@ -202,7 +202,8 @@
                     type: 'desc'
                 },
                 search: '',
-                filter: null
+                filter: null,
+                admin: false
             },
             totalJobs: 5000,
             user: window.Laravel.user,
@@ -273,8 +274,14 @@
             {
                 this.state.loading = true;
                 this.options.page = this.options.pager.page;
-                this.$http.get('/apiv1/jobs', {params : this.options}).then((response) => {
 
+                if(this.user.is_admin){
+                    this.options.admin = true;
+                } else {
+                    this.options.admin = false;
+                }
+
+                this.$http.get('/apiv1/jobs', {params : this.options}).then((response) => {
                     this.jobs = response.body.data;
                     this.options.pager.page = response.body['current_page'];
                     this.totalJobs = response.body.total;

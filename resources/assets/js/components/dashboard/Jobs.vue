@@ -109,6 +109,7 @@
                         <md-table-head >Job Type</md-table-head>
                         <md-table-head >Client</md-table-head>
                         <md-table-head >Freelancer</md-table-head>
+                        <md-table-head>Property</md-table-head>
                         <md-table-head>Options</md-table-head>
                     </md-table-row>
                 </md-table-header>
@@ -158,6 +159,14 @@
                             </div>
                             <span v-if="!job.freelancer && !job.agency">No Assigned Freelancer</span>
 
+                        </md-table-cell>
+                        <md-table-cell v-if="job.public">
+                            <md-icon class="md-primary">visibility</md-icon>
+                            <span class="font-size-10 text-muted">public</span>
+                        </md-table-cell>
+                        <md-table-cell v-if="!job.public">
+                            <md-icon class="md-primary">visibility_off</md-icon>
+                            <span class="font-size-10 text-muted">private</span>
                         </md-table-cell>
                         <md-table-cell>
                             <md-menu md-size="4" v-if="job.completed != 1" md-direction="top left">

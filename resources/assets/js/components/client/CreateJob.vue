@@ -22,12 +22,12 @@ Usage: <sage-create-job> </sage-create-job>
                             :queue-snackbars="queueNotifications"
                             :allowHtml="allowHtmlNotifications"
                     ></ui-snackbar-container>
-                    <md-button v-if="!this.jobData.public" class="md-primary" @click="updatePublic()">
+                    <md-button v-if="this.jobData.public" class="md-primary" @click="updatePublic()">
                         <md-icon>visibility</md-icon>
                         public
                     </md-button>
 
-                    <md-button v-if="this.jobData.public" class="md-primary" @click="updatePublic()">
+                    <md-button v-if="!this.jobData.public" class="md-primary" @click="updatePublic()">
                         <md-icon>visibility_off</md-icon>
                         private
                     </md-button>
