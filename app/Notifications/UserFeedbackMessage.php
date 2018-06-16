@@ -15,23 +15,30 @@ class UserFeedbackMessage extends Notification
     public $sender;
     public $job;
     public $message;
+    public $mailSubject;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct( \App\User $user, $message = "" )
+    public function __construct( \App\User $user, $message = "" , $skills = [])
     {
         $this->user = $user;
 
         $this->message = $message;
 
+        $mailLogType = 'user-feedback-sent';
+        $this->mailSubject = 'User Feedback / Support Request From ' . $this->user->name;
+        if($skills) {
+            $mailLogType = 'user-sourcing-talent-sent';
+            $this->mailSubject = 'Sourcing Talent / Support Request From ' . $this->user->name;
+        }
         \App\MailLog::create( [
             'to_user_id'   => '1',
             'from_user_id' => $user->id,
             'job_id'       => null,
-            'type'         => 'user-feedback-sent',
+            'type'         => $mailLogType,
             'system'       => 1
         ] );
     }
@@ -56,7 +63,7 @@ class UserFeedbackMessage extends Notification
     public function toMail( $notifiable )
     {
         return ( new SageMailMessage )
-            ->subject( 'User Feedback / Support Request From ' . $this->user->name )
+            ->subject( $this->mailSubject )
             ->level( 'success' )
             ->greeting( $this->user->name . " submitted the following message: " )
             ->line( $this->message )

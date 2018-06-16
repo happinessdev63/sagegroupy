@@ -391,9 +391,8 @@ class NotificationsController extends Controller
 
         $admin = \App\User::where('role','admin')->orderBy('id','ASC')->first();
         $user = \Auth::guard('api')->user();
-
         /* Send feedback email to admin */
-        $admin->notify( new \App\Notifications\UserFeedbackMessage( $user, $request->message) );
+        $admin->notify( new \App\Notifications\UserFeedbackMessage( $user, $request->message, $request->skills) );
 
         return response()->json( [
             'message' => "Your feedback has been sent successfully.",

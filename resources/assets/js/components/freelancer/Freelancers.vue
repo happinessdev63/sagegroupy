@@ -288,7 +288,7 @@
           <md-dialog-content>
               <div id="requiredSkills">
                 <span class="md-caption md-primary">Requried skills</span>
-                <md-chips v-if="options.skills" v-model="options.skills" md-input-placeholder="Add a contact" class="md-input-invalid" md-static>
+                <md-chips v-model="options.skills" md-input-placeholder="Add a contact" class="md-input-invalid" md-static>
                   <template slot-scope="skill">{{ skill.value.name }}</template>
                 </md-chips>
               </div>
@@ -451,69 +451,69 @@
         		console.log('removing skill filter');
         		this.options.skills.splice(index, 1);
             },
-			updateCitySelect() {
-				let country = null;
-				let vm = this;
-				country = _.find(this.countries, function (country) {
-					return country.name == vm.options.country;
-				});
+      			updateCitySelect() {
+      				let country = null;
+      				let vm = this;
+      				country = _.find(this.countries, function (country) {
+      					return country.name == vm.options.country;
+      				});
 
-				if (!country) {
-					return;
-                }
+      				if (!country) {
+      					return;
+                      }
 
-                /* Load countries and cities */
-				this.$http.get('/apiv1/cities', {
-					params: {
-						countryCode: country.code,
-						country: country.name,
-						format: 'autocomplete'
-					}
-				}).then((response) => {
-					this.cities = response.body;
-				}, (response) => {
-					console.log("Error loading cities");
-				});
-			},
-			addSelectedSkill(selected) {
-            	var activeSkill = false;
-            	let vm = this;
-				_.each(this.shared.skills, function (skill) {
-					if (skill.name == vm.state.selectedSkill) {
-						activeSkill = skill;
-					}
-				});
-				if (activeSkill) {
-					this.options.skills.push({
+                      /* Load countries and cities */
+      				this.$http.get('/apiv1/cities', {
+      					params: {
+      						countryCode: country.code,
+      						country: country.name,
+      						format: 'autocomplete'
+      					}
+      				}).then((response) => {
+      					this.cities = response.body;
+      				}, (response) => {
+      					console.log("Error loading cities");
+      				});
+      			},
+      			addSelectedSkill(selected) {
+                  	var activeSkill = false;
+                  	let vm = this;
+      				_.each(this.shared.skills, function (skill) {
+      					if (skill.name == vm.state.selectedSkill) {
+      						activeSkill = skill;
+      					}
+      				});
+      				if (activeSkill) {
+      					this.options.skills.push({
 
-						id: activeSkill.id,
-                        name: activeSkill.name,
-                        level: 'any'
-                    });
-                }
+      						id: activeSkill.id,
+                              name: activeSkill.name,
+                              level: 'any'
+                          });
+                      }
 
-                this.state.selectedSkill = '';
+                      this.state.selectedSkill = '';
 
-			},
+      			},
             onSearch(term) {
                 this.options.search = term;
                 //this.refreshFreelancers();
             },
-			inviteFreelancerAgency(freelancer) {
-				appBus.$emit('agency:inviteFreelancer', freelancer);
-			},
-            inviteFreelancer(freelancer) {
-				appBus.$emit('openInvite', freelancer, false);
-            },
-			inviteAgency(agency) {
-				appBus.$emit('openInvite', agency, true);
-			},
+      			inviteFreelancerAgency(freelancer) {
+      				appBus.$emit('agency:inviteFreelancer', freelancer);
+      			},
+                  inviteFreelancer(freelancer) {
+      				appBus.$emit('openInvite', freelancer, false);
+                  },
+      			inviteAgency(agency) {
+      				appBus.$emit('openInvite', agency, true);
+      			},
             viewFreelancer(freelancer) {
                 window.location = this.freelancerLink(freelancer);
             },
-			viewAgency(agency) {
-				window.location = `/agency/${agency.id}`;
-			},
+      			viewAgency(agency) {
+      				window.location = `/agency/${agency.id}`;
+      			},
             editFreelancer(freelancer) {
                 window.location = this.freelancerEditLink(freelancer);
             },
@@ -546,48 +546,57 @@
                     console.log(response);
                 });
             },
-      sendRequirement() {
+      			refreshSkills()
+      			{
+      				this.$http.get('/apiv1/skills', {params: this.skillOptions}).then((response) => {
+      						this.shared.skills = response.body;
 
-        this.$http.post('/apiv1/feedback', {'message' : this.RequireMessage}).then((response) => {
+      						var vm = this;
+      						vm.availableSkills = [];
+      						_.each(this.shared.skills, function (skill) {
 
-          this.$root.showNotification(response.body.message);
-          this.closeDialog('feedbackDialog');
+      							var suffix = '';
+      							if (skill.users_count != 1) {
+      								suffix = 's';
+      							}
 
-        }, (response) => {
-          this.$root.showNotification('Please enter a message, between 5 and 2048 characters.');
-        });
-      },
-      closeDialog(ref) {
-          this.$refs[ref].close();
-      },
-			refreshSkills()
-			{
-				this.$http.get('/apiv1/skills', {params: this.skillOptions}).then((response) => {
-						this.shared.skills = response.body;
+      							vm.availableSkills.push({
+      								//'label' : skill.name + ' (' + skill.users_count + ' Freelancer' + suffix +')',
+      								'label': skill.name,
+      								'value': skill.name
+      							});
+      						})
 
-						var vm = this;
-						vm.availableSkills = [];
-						_.each(this.shared.skills, function (skill) {
+      					}, (response) => {
+      						this.$root.showNotification(response.body.message);
+      						console.log("Error loading skills");
+      						console.log(response);
+      					}
+      				);
+      			},
+            //Part Contact Us dialog
+            sendRequirement() {
+              console.log(this.options.skills);
+              let skillName = [];
+              this.options.skills.map(x => {
+                  skillName.push(x.name);
+              });
+              
+              this.$http.post('/apiv1/feedback', {'message' : this.RequireMessage, 'skills' : skillName }).then((response) => {
 
-							var suffix = '';
-							if (skill.users_count != 1) {
-								suffix = 's';
-							}
+                this.$root.showNotification(response.body.message);
+                this.closeDialog('sourcingDialog');
 
-							vm.availableSkills.push({
-								//'label' : skill.name + ' (' + skill.users_count + ' Freelancer' + suffix +')',
-								'label': skill.name,
-								'value': skill.name
-							});
-						})
-
-					}, (response) => {
-						this.$root.showNotification(response.body.message);
-						console.log("Error loading skills");
-						console.log(response);
-					}
-				);
-			},
-    }
-  }
+              }, (response) => {
+                this.$root.showNotification('Please enter a message, between 5 and 2048 characters.');
+              });
+            },
+            openDialog(ref) {
+                this.$refs[ref].open();
+            },
+            closeDialog(ref) {
+                this.$refs[ref].close();
+            },
+          }
+        }
 </script>
