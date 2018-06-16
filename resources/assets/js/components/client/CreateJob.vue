@@ -194,7 +194,7 @@ Usage: <sage-create-job> </sage-create-job>
                     description: '',
                     'payment_terms': '',
                     files: [],
-                    public: true,
+                    public: false,
                 },
                 selectedFile: {},
                 notifyPosition: 'right',

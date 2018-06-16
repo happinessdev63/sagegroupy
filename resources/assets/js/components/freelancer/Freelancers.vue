@@ -143,6 +143,7 @@
 
         <div class="col-xs-12" v-if="state.searchSelected">
             <md-button class="pull-right md-primary md-raised" @click="refreshFreelancers">Search</md-button>
+            <md-button class="pull-left md-primary md-raised" @click="openDialog('sourcingDialog')">Contact Us</md-button>
         </div>
 
 
@@ -280,6 +281,32 @@
         <div class="clearfix"></div>
       </md-table-card>
 
+      <!-- Clicking contact us, showing the dialog for sourcing talent-->
+      <md-dialog ref="sourcingDialog" class="feedback-dialog">
+          <md-dialog-title>Contact us for sourcing talent</md-dialog-title>
+
+          <md-dialog-content>
+              <div id="requiredSkills">
+                <span class="md-caption md-primary">Requried skills</span>
+                <md-chips v-if="options.skills" v-model="options.skills" md-input-placeholder="Add a contact" class="md-input-invalid" md-static>
+                  <template slot-scope="skill">{{ skill.value.name }}</template>
+                </md-chips>
+              </div>
+
+              <form>
+                  <md-input-container>
+                      <label>Enter Your Requirements or Comments</label>
+                      <md-textarea v-model="RequireMessage"></md-textarea>
+                  </md-input-container>
+              </form>
+          </md-dialog-content>
+
+          <md-dialog-actions>
+              <md-button class="md-primary" @click="closeDialog('sourcingDialog')">Cancel</md-button>
+              <md-button class="md-primary" @click="sendRequirement">Send</md-button>
+          </md-dialog-actions>
+      </md-dialog>
+
     </div>
 </template>
 
@@ -318,6 +345,8 @@
         },
         data() {
             return {
+                RequireMessage: '',
+                contacts: ['Marcos Moura'],
                 user: window.Laravel.user,
                 shared: window.sageSource,
                 totalFreelancers: 0,
@@ -517,6 +546,20 @@
                     console.log(response);
                 });
             },
+      sendRequirement() {
+
+        this.$http.post('/apiv1/feedback', {'message' : this.RequireMessage}).then((response) => {
+
+          this.$root.showNotification(response.body.message);
+          this.closeDialog('feedbackDialog');
+
+        }, (response) => {
+          this.$root.showNotification('Please enter a message, between 5 and 2048 characters.');
+        });
+      },
+      closeDialog(ref) {
+          this.$refs[ref].close();
+      },
 			refreshSkills()
 			{
 				this.$http.get('/apiv1/skills', {params: this.skillOptions}).then((response) => {
@@ -545,6 +588,6 @@
 					}
 				);
 			},
-        }
     }
+  }
 </script>

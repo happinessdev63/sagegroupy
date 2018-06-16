@@ -49,7 +49,7 @@
                 <md-icon>clear</md-icon>
             </md-button>
 
-            <div v-if="state.searchSelected" class="col-xs-12">
+            <div v-if="state.searchSelected" class="col-xs-10">
                 <md-input-container md-inline>
                     <label>Search Jobs</label>
                     <md-input v-model="options.search" @change="onSearch"></md-input>
