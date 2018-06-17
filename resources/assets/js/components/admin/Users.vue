@@ -271,7 +271,6 @@
                 this.state.loading = true;
                 this.options.page = this.options.pager.page;
                 this.$http.get('/apiv1/users', {params: this.options}).then((response) => {
-
                     this.users = response.body.data;
                     this.options.pager.page = response.body['current_page'];
                     this.totalUsers = response.body.total;

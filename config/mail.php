@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 2525),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,10 +55,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => 'notifications@sagegroupy.com',
-        'name' => 'Sagegroupy',
-    ],
+    "from" => array(
+        "address" => "mohammaddavari630@gmail.com",
+        "name" => "mohammaddavari"
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'ff841407064eac',
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => '7d238c4850221d',
 
     /*
     |--------------------------------------------------------------------------

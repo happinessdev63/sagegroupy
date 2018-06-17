@@ -333,6 +333,14 @@ const app = new Vue({
 			});
 
 		},
-
+    postPdf(user) {
+      this.$http.get('/apiv1/profile/postPdf/'+user.id).then((response) => {
+				// this.countries = response.body;
+        console.log("OK");
+			}, (response) => {
+				console.log("Error loading countries");
+			});
     }
+  },
+
 });

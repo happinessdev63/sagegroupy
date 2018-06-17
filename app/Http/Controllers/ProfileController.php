@@ -94,7 +94,6 @@ class ProfileController extends Controller
      */
     public function viewProfile(Request $request, User $user)
     {
-
         $user->load(
             "clientJobs",
             "freelancerJobs",
@@ -111,7 +110,6 @@ class ProfileController extends Controller
             'recommendations.freelancer',
             'links'
         );
-
         /* Fire event */
         event( new \App\Events\ProfileViewedEvent( $user, \Auth::user() ?: "anon" ) );
 

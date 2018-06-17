@@ -458,7 +458,6 @@
 				});
             </script>
 
-
         @section('scripts')
         @show
     </html>

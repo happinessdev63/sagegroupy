@@ -47,6 +47,12 @@ Route::get( '/privacy', function () {
     return view( "lander.privacy" );
 } );
 
+Route::get( '/preview', function () {
+    return view( "profile");
+} );
+
+
+
 Route::post( '/prelaunch', 'HomeController@prelaunchSignup' );
 Route::post( '/prelaunchSurvey', 'HomeController@prelaunchSurvey' );
 Route::get( '/prelaunch', 'HomeController@prelaunch' );

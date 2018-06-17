@@ -288,15 +288,15 @@
           <md-dialog-content>
               <div id="requiredSkills">
                 <span class="md-caption md-primary">Requried skills</span>
-                <md-chips v-model="options.skills" md-input-placeholder="Add a contact" class="md-input-invalid" md-static>
-                  <template slot-scope="skill">{{ skill.value.name }}</template>
+                <md-chips v-model="requireSkills" md-input-placeholder="Add a skill" class="md-input-invalid">
+                  <template slot-scope="skill">{{ skill.value }}</template>
                 </md-chips>
               </div>
 
               <form>
                   <md-input-container>
                       <label>Enter Your Requirements or Comments</label>
-                      <md-textarea v-model="RequireMessage"></md-textarea>
+                      <md-textarea v-model="requireMessage"></md-textarea>
                   </md-input-container>
               </form>
           </md-dialog-content>
@@ -345,8 +345,8 @@
         },
         data() {
             return {
-                RequireMessage: '',
-                contacts: ['Marcos Moura'],
+                requireMessage: '',
+                requireSkills: [],
                 user: window.Laravel.user,
                 shared: window.sageSource,
                 totalFreelancers: 0,
@@ -354,15 +354,15 @@
                 countries: [],
                 cities: [],
                 errors: {},
-				skillOptions: {
-					pager: {
-						page: 1,
-						size: 25
-					},
-					search: '',
-					filter: '',
-					paginate: false
-				},
+        				skillOptions: {
+        					pager: {
+        						page: 1,
+        						size: 25
+        					},
+        					search: '',
+        					filter: '',
+        					paginate: false
+        				},
                 options: {
                     freelancer_id: null,
                     skills: [],
@@ -413,27 +413,27 @@
             }
         },
         methods: {
-			autoCompleteMatch: function (suggestion, query) {
-				return suggestion.value.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-			},
-        	isMatchedSkill: function(skill) {
+      			autoCompleteMatch: function (suggestion, query) {
+      				return suggestion.value.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      			},
+          	isMatchedSkill: function(skill) {
         	    let match = this.options.skills.find((selectedSkill) => {
         	    	return selectedSkill.id == skill.id;
                 });
 
         	    return match;
             },
-			selectSort: function (a, b) {
-				if (a.name < b.name) {
-					return -1;
-				}
+      			selectSort: function (a, b) {
+      				if (a.name < b.name) {
+      					return -1;
+      				}
 
-				if (a.name > b.name) {
-					return 1;
-				}
+      				if (a.name > b.name) {
+      					return 1;
+      				}
 
-				return 0;
-			},
+      				return 0;
+      			},
             onFilter(filter) {
                 this.options.filter = filter;
                 this.refreshFreelancers();
@@ -448,8 +448,8 @@
                 this.refreshFreelancers();
             },
             removeSkillFilter(index) {
-        		console.log('removing skill filter');
-        		this.options.skills.splice(index, 1);
+          		console.log('removing skill filter');
+          		this.options.skills.splice(index, 1);
             },
       			updateCitySelect() {
       				let country = null;
@@ -535,7 +535,6 @@
             {
                 this.state.loading = true;
                 this.$http.get('/apiv1/freelancers', {params: this.options}).then((response) => {
-                    console.log(response);
                     this.shared.freelancers = response.body.data;
                     this.totalFreelancers = response.body.total;
                     this.state.loading = false;
@@ -543,7 +542,6 @@
                 }, (response) => {
                     this.$root.showNotification(response.body.message);
                     console.log("Error loading freelancers.");
-                    console.log(response);
                 });
             },
       			refreshSkills()
@@ -570,19 +568,12 @@
       					}, (response) => {
       						this.$root.showNotification(response.body.message);
       						console.log("Error loading skills");
-      						console.log(response);
       					}
       				);
       			},
             //Part Contact Us dialog
             sendRequirement() {
-              console.log(this.options.skills);
-              let skillName = [];
-              this.options.skills.map(x => {
-                  skillName.push(x.name);
-              });
-              
-              this.$http.post('/apiv1/feedback', {'message' : this.RequireMessage, 'skills' : skillName }).then((response) => {
+              this.$http.post('/apiv1/feedback', {'message' : this.requireMessage, 'skills' : this.requireSkills }).then((response) => {
 
                 this.$root.showNotification(response.body.message);
                 this.closeDialog('sourcingDialog');
@@ -592,9 +583,13 @@
               });
             },
             openDialog(ref) {
+                this.options.skills.map(x => {
+                    this.requireSkills.push(x.name);
+                });
                 this.$refs[ref].open();
             },
             closeDialog(ref) {
+                this.requireSkills = [];
                 this.$refs[ref].close();
             },
           }

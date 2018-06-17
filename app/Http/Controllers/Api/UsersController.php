@@ -533,8 +533,27 @@ class UsersController extends Controller
         ],
             Response::HTTP_UNPROCESSABLE_ENTITY
         );
+    }
 
+    /**
+     * Download user profile.
+     *
+     */
 
+    public function downloadToPdfFile( Request $request, User $user, $userId ){
+        // dd("OK");die();
+        // /* Only allow admin users to download any user's profile */
+        if ( !\Auth::user()->isAdmin() ) {
+            return redirect( "/dashboard" );
+        }
+        // return view("admin.agencies");
+        $html = view('emails.layout')->render();
+        dd($html);die();
+        // return response()->json( [
+        //     'message' => "Error deleting recommendation. Please try again."
+        // ],
+        //     Response::HTTP_UNPROCESSABLE_ENTITY
+        // );
     }
 
 }
