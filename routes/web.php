@@ -81,6 +81,14 @@ Route::get('/profile/{user}', 'ProfileController@viewProfile');
 Route::get('/p/{shareId}', 'ProfileController@viewProfileShareId');
 Route::get('/profile/edit/{user}', 'ProfileController@profileEdit')->middleware( [ 'auth' ] );
 Route::get( '/search', 'ProfileController@search' )->middleware( [ 'auth' ] );
+Route::get('/pdfview',function() {
+  // if($request->has('download')){
+      $pdf = PDF::loadView('pdfview');
+      return $pdf->download('pdfview.pdf');
+  // }
+
+  return view('pdfview');
+});
 
 /* References */
 Route::get( '/generalReference/{generalReference}', 'ProfileController@viewGeneralReference' );

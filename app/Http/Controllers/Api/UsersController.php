@@ -540,20 +540,49 @@ class UsersController extends Controller
      *
      */
 
-    public function downloadToPdfFile( Request $request, User $user, $userId ){
-        // dd("OK");die();
+    public function downloadToPdfFile( Request $request, $userId){
         // /* Only allow admin users to download any user's profile */
         if ( !\Auth::user()->isAdmin() ) {
             return redirect( "/dashboard" );
         }
-        // return view("admin.agencies");
-        $html = view('emails.layout')->render();
-        dd($html);die();
-        // return response()->json( [
-        //     'message' => "Error deleting recommendation. Please try again."
-        // ],
-        //     Response::HTTP_UNPROCESSABLE_ENTITY
-        // );
+        //
+        // $user = \App\User::where("id", $userId)->with(
+        //     "clientJobs",
+        //     "freelancerJobs",
+        //     "agencies",
+        //     "links",
+        //     "skills",
+        //     "references",
+        //     "ownedAgencies",
+        //     "agencies.freelancers",
+        //     "ownedAgencies.freelancers",
+        //     'recommendedUsers',
+        //     'recommendedUsers.owner',
+        //     'recommendedUsers.freelancer',
+        //     'recommendations.owner',
+        //     'recommendations.freelancer'
+        // )->first();
+        // // return view("admin.agencies");
+        // // return view( 'profile', [
+        // //     'user' => $user
+        // // ]);
+        // $html = view('profile.pdfTemplate', [ 'user'->$user ])->render();
+        // dd($html);die();
+        // // return response()->json( [
+        // //     'message' => "Error deleting recommendation. Please try again."
+        // // ],
+        // //     Response::HTTP_UNPROCESSABLE_ENTITY
+        // // );
+        // $items = DB::table("items")->get();
+        // view()->share('items',$items);
+
+        if($request->has('download')){
+            $pdf = PDF::loadView('pdfview');
+            return $pdf->download('pdfview.pdf');
+        }
+
+
+        return view('pdfview');
     }
 
 }
