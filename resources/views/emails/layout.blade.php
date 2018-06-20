@@ -23,7 +23,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!--
+<!--
                         <table align="center" class="container header float-center">
                             <tbody>
                                 <tr>
@@ -46,7 +46,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        -->
+ -->
                         <table align="center" class="container body-drip float-center">
                             <tbody>
                                 <tr>

@@ -77,19 +77,12 @@ Route::get('/dashboard', 'ProfileController@dashboard')->middleware( [ 'auth' ] 
 
 Route::get( '/profileWizard', 'ProfileController@profileWizard' )->middleware( [ 'auth' ] );
 Route::get('/profile', 'ProfileController@profile');
+Route::get('/profile/postPdf/{userId}', 'ProfileController@downloadToPdf');
+// Route::get('/profile/postPdf/preview', 'ProfileController@downloadToPdf');
 Route::get('/profile/{user}', 'ProfileController@viewProfile');
 Route::get('/p/{shareId}', 'ProfileController@viewProfileShareId');
 Route::get('/profile/edit/{user}', 'ProfileController@profileEdit')->middleware( [ 'auth' ] );
 Route::get( '/search', 'ProfileController@search' )->middleware( [ 'auth' ] );
-Route::get('/pdfview',function() {
-  // if($request->has('download')){
-      $pdf = PDF::loadView('pdfview');
-      return $pdf->download('pdfview.pdf');
-  // }
-
-  return view('pdfview');
-});
-
 /* References */
 Route::get( '/generalReference/{generalReference}', 'ProfileController@viewGeneralReference' );
 

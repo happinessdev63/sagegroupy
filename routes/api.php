@@ -32,7 +32,7 @@ Route::post( '/profile/delete/{user}', 'Api\UsersController@delete' );
 Route::post( '/profile/addRec/', 'Api\UsersController@addRecommendation' );
 Route::get( '/profile/rec/delete/{rec}', 'Api\UsersController@deleteRecommendation' );
 Route::get( '/profile/{user}', 'Api\UsersController@fetch' );
-// Route::get( '/profile/postPdf/{userId}', 'Api\UsersController@downloadToPdfFile');
+Route::get( '/profile/postPdf/{userId}', 'Api\UsersController@downloadToPdfFile');
 
 /* Jobs */
 Route::get( '/jobs/{job}', 'Api\JobsController@fetch' );

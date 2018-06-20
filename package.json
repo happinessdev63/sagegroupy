@@ -31,6 +31,7 @@
         "dropzone": "^5.1.1",
         "extract-text-webpack-plugin": "^2.1.2",
         "fuzzysearch": "^1.0.3",
+        "html2pdf.js": "^0.9.0",
         "keen-ui": "^0.8.9",
         "node-sass": "^3.13.1",
         "portal-vue": "^1.1.1",

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use PDF;
 
 class UsersController extends Controller
 {
@@ -501,88 +502,6 @@ class UsersController extends Controller
             'status'  => "success"
         ] );
 
-    }
-
-    /**
-     * Add a new recommended freelancer relation to a user
-     * @param Request $request
-     * @return mixed
-     */
-    public function deleteRecommendation( Request $request, Recommendation $rec )
-    {
-
-        if ( \Auth::user()->id != $rec->from_user_id && !\Auth::user()->isAdmin() ) {
-            return response()->json( [
-                'message' => "You do not have permission to delete this recommendation.",
-                'status'  => "error"
-            ],
-                Response::HTTP_UNPROCESSABLE_ENTITY
-            );
-        }
-
-        if ( $rec->delete() ) {
-            return response()->json( [
-                'message' => "Recommendation deleted successfully.",
-                'status'  => "success"
-            ] );
-        }
-
-        return response()->json( [
-            'message' => "Error deleting recommendation. Please try again.",
-            'status'  => "error"
-        ],
-            Response::HTTP_UNPROCESSABLE_ENTITY
-        );
-    }
-
-    /**
-     * Download user profile.
-     *
-     */
-
-    public function downloadToPdfFile( Request $request, $userId){
-        // /* Only allow admin users to download any user's profile */
-        if ( !\Auth::user()->isAdmin() ) {
-            return redirect( "/dashboard" );
-        }
-        //
-        // $user = \App\User::where("id", $userId)->with(
-        //     "clientJobs",
-        //     "freelancerJobs",
-        //     "agencies",
-        //     "links",
-        //     "skills",
-        //     "references",
-        //     "ownedAgencies",
-        //     "agencies.freelancers",
-        //     "ownedAgencies.freelancers",
-        //     'recommendedUsers',
-        //     'recommendedUsers.owner',
-        //     'recommendedUsers.freelancer',
-        //     'recommendations.owner',
-        //     'recommendations.freelancer'
-        // )->first();
-        // // return view("admin.agencies");
-        // // return view( 'profile', [
-        // //     'user' => $user
-        // // ]);
-        // $html = view('profile.pdfTemplate', [ 'user'->$user ])->render();
-        // dd($html);die();
-        // // return response()->json( [
-        // //     'message' => "Error deleting recommendation. Please try again."
-        // // ],
-        // //     Response::HTTP_UNPROCESSABLE_ENTITY
-        // // );
-        // $items = DB::table("items")->get();
-        // view()->share('items',$items);
-
-        if($request->has('download')){
-            $pdf = PDF::loadView('pdfview');
-            return $pdf->download('pdfview.pdf');
-        }
-
-
-        return view('pdfview');
     }
 
 }

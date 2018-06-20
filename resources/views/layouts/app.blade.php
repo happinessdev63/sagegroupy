@@ -278,6 +278,12 @@
                                         @if (\Auth::user()->is_freelancer)
                                         <ul class="site-menu">
                                             <li class="site-menu-category">Jobs</li>
+                                            <li class="site-menu-item" :class="getNavClass('search')">
+                                                <a class="animsition-link" href="/search" >
+                                                    <i class="md-icon material-icons site-menu-icon md-theme-default">find_in_page</i>
+                                                    <span class="site-menu-title">Find a Job</span>
+                                                </a>
+                                            </li>
                                             <li class="site-menu-item" :class="getNavClass('createReference')">
                                                 <a class="animsition-link" href="/jobs/createReference">
                                                     <i class="md-icon material-icons site-menu-icon md-theme-default">group_add</i>

@@ -45,7 +45,7 @@
                 <sage-freelancer-list ></sage-freelancer-list>
             </div>
           </md-tab>
-          <md-tab id="job" md-label="Job" md-icon="work">
+          <md-tab id="job" md-label="Job" md-icon="work" :md-active="'{{ $user->role}}' === 'freelancer'">
             <div>
                 <sage-admin-jobs ref="admin-users"></sage-admin-jobs>
             </div>

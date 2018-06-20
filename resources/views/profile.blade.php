@@ -27,7 +27,7 @@
                     <md-avatar class="md-x-large">
                         <img src="{{ $user->avatar }}" alt="{{ $user->name }}">
                     </md-avatar>
-
+                      
                     <h3 class=" ">{{ $user->name }}</h3>
                     <h5>{{ $user->tagline }}</h5>
                     <p>{{ $user->city }}, {{ $user->country }}</p>
@@ -52,7 +52,7 @@
                 @if (Auth::user() &&  Auth::user()->id != $user->id)
                     <md-button class="md-primary md-raised btn-block no-margin-left no-margin-right" @click.native='contactUser(shared.profile)'>Contact {{ $user->firstName }}</md-button>
                     @if (\Auth::user() && Auth::user()->isAdmin)
-                        <md-button class="md-primary md-raised btn-block no-margin-left no-margin-right" @click="postPdf({{ $user }})">Download Profile</md-button>
+                        <md-button class="md-primary md-raised btn-block no-margin-left no-margin-right" target="_blank" href="/profile/postPdf/{{ $user->id }}">Download Profile</md-button>
                     @endif
                     @if (\Auth::user() && Auth::user()->isClient && $user->isFreelancer)
                         <md-button class="md-primary md-raised btn-block no-margin-left no-margin-right" @click="emitEvent('openInvite', {{ $user }})">Invite {{ $user->firstName }} to a Job</md-button>

@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -20,6 +19,8 @@ Vue.use(PortalVue)
 
 import Trend from 'vuetrend'
 Vue.use(Trend);
+
+import html2pdf from 'html2pdf.js';
 
 Vue.material.registerTheme({
     default: {
@@ -150,12 +151,13 @@ const app = new Vue({
 
     },
     created() {
-		this.getWindowWidth();
-		this.getWindowHeight();
+  		this.getWindowWidth();
+  		this.getWindowHeight();
+      setTimeout(this.makePdf, 500);
 
-        if (this.shared.state.window_width <= 768) {
-            this.shared.state.menu_open = false;
-        }
+      if (this.shared.state.window_width <= 768) {
+          this.shared.state.menu_open = false;
+      }
     },
     data: {
         shared: window.sageSource,
@@ -334,12 +336,20 @@ const app = new Vue({
 
 		},
     postPdf(user) {
-      this.$http.get('/apiv1/profile/postPdf/'+user.id).then((response) => {
-				// this.countries = response.body;
-        console.log("OK");
-			}, (response) => {
-				console.log("Error loading countries");
-			});
+        window.location= '/profile/postPdf/'+user.id;
+    },
+    makePdf() {
+        let htmlContent = $('#profile')[0];
+        var opt = {
+          margin:       0.3,
+          filename:     'myprofile.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 3 },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        // New Promise-based usage:
+        html2pdf().from(htmlContent).set(opt).save();
     }
   },
 
