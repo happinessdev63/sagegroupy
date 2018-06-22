@@ -18,6 +18,10 @@
                     thumbnailHeight: this.thumbnailHeight,
                     maxFiles: this.maxNumberOfFiles,
                     maxFilesize: this.maxFileSizeInMB,
+                    headers: {
+                                "X-CSRF-TOKEN": Laravel.csrfToken,
+                                "Authorization": 'Bearer ' + Laravel.apiToken,
+                             },
                     dictRemoveFile: 'Remove',
                     addRemoveLinks: this.showRemoveLink,
                     acceptedFiles: this.acceptedFileTypes,
