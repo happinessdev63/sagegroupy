@@ -829,6 +829,9 @@ export default {
                     }
                 };
                 client.upload.addEventListener("progress", uploadProgress, false); //监听进度
+                client.setRequestHeader('X-CSRF-TOKEN', Laravel.csrfToken);
+                client.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                client.setRequestHeader('Authorization', 'Bearer ' + Laravel.apiToken);
                 client.send(fmData);
             }).then(
                 // 上传成功
