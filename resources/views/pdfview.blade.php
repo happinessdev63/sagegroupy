@@ -212,7 +212,7 @@
               <div class="col-sm-9">
                 <div style="position:relative; float:right; width: 20%; height: 20%;">
                     <img src="{{ asset('/img/logo_xs.png') }}" style="width:100%"/>
-                    <a style="color: rgba(0, 150, 136, 0.95); font-size: 10px; padding-left: 0px; text-decoration: none;" href="{{ '/dashboard' }}">
+                    <a style="color: rgba(0, 150, 136, 0.95); font-size: 10px; padding-left: 0px; text-decoration: none;" href="/profile/{{ $user->id }}">
                       View on SageGroupy
                     </a>
                 </div>

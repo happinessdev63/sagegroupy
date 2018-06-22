@@ -143,7 +143,7 @@
 
         <div class="col-xs-12" v-if="state.searchSelected">
             <md-button class="pull-right md-primary md-raised" @click="refreshFreelancers">Search</md-button>
-            <md-button class="pull-left md-primary md-raised" @click="openDialog('sourcingDialog')">Contact Us</md-button>
+            <md-button class="pull-left md-primary md-raised" @click="openDialog('sourcingDialog')">Sourcing Support</md-button>
         </div>
 
 
@@ -283,7 +283,7 @@
 
       <!-- Clicking contact us, showing the dialog for sourcing talent-->
       <md-dialog ref="sourcingDialog" class="feedback-dialog">
-          <md-dialog-title>Contact us for sourcing talent</md-dialog-title>
+          <md-dialog-title>Support for Sourcing Talent</md-dialog-title>
 
           <md-dialog-content>
               <div id="requiredSkills">
