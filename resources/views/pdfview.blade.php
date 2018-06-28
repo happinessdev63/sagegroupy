@@ -9,22 +9,7 @@
 
     @section ('meta')
         <!-- META -->
-            <meta itemprop="name" content="Sage Groupy">
-            <meta itemprop="url" content="http://sagegroupy.com"/>
-            <meta name="description" itemprop="description" content="Sage Groupy">
-            <meta name="author" content="SageGroupy">
 
-            <meta property="og:url" content="http://sagegroupy.com"/>
-            <meta property="og:type" content="website"/>
-            <meta property="og:title" content="Sage Groupy Freelancers"/>
-            <meta property="og:description" content="Sage Groupy Freelancers"/>
-            <meta property="twitter:url" content="http://sagegroupy.com"/>
-            <meta property="twitter:type" content="website"/>
-            <meta property="twitter:title" content="Sage Groupy Freelancers"/>
-            <meta property="twitter:description" content="Sage Groupy Freelancers"/>
-
-            <meta property="og:image" content="{{ env("APP_URL")}}/img/icon_xxs.png"/>
-            <meta property="twitter:image" content="{{ env("APP_URL")}}/img/icon_xxs.png"/>
         @show
 
         @section ('title')
@@ -210,8 +195,9 @@
                   <img src="{{ asset($user->avatar) }}" class="img-thumbnail" alt="{{ $user->name }}"/>
               </div>
               <div class="col-sm-9">
-                <div style="position:relative; float:right; width: 20%; height: 20%;">
+                <div style="position:relative; float:right; width: 20%; height: 20%;" id="companyLogo">
                     <img src="{{ asset('/img/logo_xs.png') }}" style="width:100%"/>
+                    <md-button @click="$root.emitEvent('editAvatar')" class="md-transparent font-size-10 margin-left-5">Edit Avatar</md-button>
                     <a style="color: rgba(0, 150, 136, 0.95); font-size: 10px; padding-left: 0px; text-decoration: none;" href="/profile/{{ $user->id }}">
                       View on SageGroupy
                     </a>
@@ -249,8 +235,6 @@
                 <hr class="green-hr margin-top-5" style="border-color: #2B78FE;"/>
                 <sage-profile-references></sage-profile-references>
             </div>
-
-
 
             <div id="additional" class="col-lg-12 margin-top-10">
                 <h4 class="margin-bottom-10" style="color: #e91e63;"><md-icon>class</md-icon>Additional References</h4>
@@ -306,6 +290,7 @@
                     </md-list-item>
                     @endforeach
                 </md-list>
+                <md-button class="md-raised md-primary pull-right" id="startBtn" @click="makePdf()">Download</md-button>
             </div>
           </div>
       </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use PDF;
 
 class ProfileController extends Controller
 {
@@ -25,7 +24,7 @@ class ProfileController extends Controller
      */
     public function dashboard()
     {
-
+        dd("OK");die();
         $user = \App\User::where("id",\Auth::user()->id)->with(
             "clientJobs",
             "freelancerJobs",

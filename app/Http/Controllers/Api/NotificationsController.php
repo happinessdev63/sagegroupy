@@ -384,10 +384,10 @@ class NotificationsController extends Controller
      */
     public function userFeedback(Request $request )
     {
-
         $this->validate( $request, [
             'message' => 'required|min:5|max:2048',
         ] );
+
 
         $admin = \App\User::where('role','admin')->orderBy('id','ASC')->first();
         $user = \Auth::guard('api')->user();

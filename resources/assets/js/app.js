@@ -153,7 +153,6 @@ const app = new Vue({
     created() {
   		this.getWindowWidth();
   		this.getWindowHeight();
-      setTimeout(this.makePdf, 500);
 
       if (this.shared.state.window_width <= 768) {
           this.shared.state.menu_open = false;
@@ -339,6 +338,7 @@ const app = new Vue({
         window.location= '/profile/postPdf/'+user.id;
     },
     makePdf() {
+        $('#startBtn').hide();
         let htmlContent = $('#profile')[0];
         var opt = {
           margin:       0.3,

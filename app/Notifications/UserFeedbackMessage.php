@@ -33,6 +33,11 @@ class UserFeedbackMessage extends Notification
         if($skills) {
             $mailLogType = 'user-sourcing-talent-sent';
             $this->mailSubject = 'Sourcing Talent / Support Request From ' . $this->user->name;
+            $this->message = "<b>Required skill: ";
+            foreach($skills as $skill) {
+                $this->message .= $skill.",";
+            }
+            $this->message = substr($this->message,0, strlen($this->message)-1)."</b><br /><br />".$message;
         }
         \App\MailLog::create( [
             'to_user_id'   => '1',

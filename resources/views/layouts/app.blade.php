@@ -46,15 +46,15 @@
             @show
 
         <!-- Scripts -->
-            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <script>
 				(adsbygoogle = window.adsbygoogle || []).push({
 					google_ad_client: "ca-pub-6500659003306107",
 					enable_page_level_ads: true
 				});
-            </script> -->
+            </script>
             <!-- Facebook Pixel Code -->
-            <!-- <script>
+            <script>
 				!function (f, b, e, v, n, t, s) {
 					if (f.fbq)return;
 					n = f.fbq = function () {
@@ -75,12 +75,12 @@
 					'https://connect.facebook.net/en_US/fbevents.js');
 				fbq('init', '542388909257295');
 				fbq('track', 'PageView');
-            </script> -->
-            <!-- <noscript>
+            </script>
+            <noscript>
                 <img height="1" width="1"
                      src="https://www.facebook.com/tr?id=542388909257295&ev=PageView
 &noscript=1"/>
-            </noscript> -->
+            </noscript>
             <!-- End Facebook Pixel Code -->
             <script>
 				window.Laravel = <?php echo json_encode( [
@@ -439,7 +439,7 @@
             <script src="/js/plugins/jquery.fancybox.min.js"></script>
             <script src="/js/plugins/product-tour.min.js"></script>
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58f7a8bf66ec9acf"></script>
-            <!-- <script>
+            <script>
                 (function (i, s, o, g, r, a, m) {
                     i['GoogleAnalyticsObject'] = r;
                     i[r] = i[r] || function () {
@@ -453,7 +453,7 @@
                 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
                 ga('create', 'UA-84063026-1', 'auto');
                 ga('send', 'pageview');
-            </script> -->
+            </script>
             <script>
 				var vmBus = window.appBus;
 				window.addthis.addEventListener('addthis.user.clickback', function (event) {

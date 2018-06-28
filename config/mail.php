@@ -57,7 +57,7 @@ return [
 
     "from" => array(
         "address" => "mohammaddavari630@gmail.com",
-        "name" => "mohammaddavari"
+        "name" => "SageGroupy"
     ),
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => 'ff841407064eac',
+    'username' =>  env('MAIL_USERNAME'),
 
-    'password' => '7d238c4850221d',
+    'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------

@@ -46,7 +46,7 @@ class SkillsTableSeeder extends Seeder
         }
 
         $users = \App\User::where("role", 'like', '%freelancer%')->get();
-        $skills = \App\SKill::get();
+        $skills = \App\Skill::get();
         $levels = [ 'Entry', 'Junior', 'Intermediate', 'Senior', 'Expert' ];
 
         foreach ($users as $user) {
