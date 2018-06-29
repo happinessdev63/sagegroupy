@@ -24,7 +24,6 @@ class ProfileController extends Controller
      */
     public function dashboard()
     {
-        dd("OK");die();
         $user = \App\User::where("id",\Auth::user()->id)->with(
             "clientJobs",
             "freelancerJobs",

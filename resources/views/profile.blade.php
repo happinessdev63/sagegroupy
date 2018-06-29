@@ -27,7 +27,7 @@
                     <md-avatar class="md-x-large">
                         <img src="{{ $user->avatar }}" alt="{{ $user->name }}">
                     </md-avatar>
-                      
+
                     <h3 class=" ">{{ $user->name }}</h3>
                     <h5>{{ $user->tagline }}</h5>
                     <p>{{ $user->city }}, {{ $user->country }}</p>

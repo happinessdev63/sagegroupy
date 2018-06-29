@@ -74,6 +74,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'role' => $data['type'],
             'api_token' => str_random(60),
+            'remember_token' => str_random(60),
             'meta' => [
                 'first_login' => true,
                 'profile_wizard_complete' => false,

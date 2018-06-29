@@ -6,7 +6,7 @@ return [
         'defaultListName' => 'prelaunch',
         'lists' => [
             'prelaunch' => [
-                'id' => env('MAILCHIMP_LIST_ID', "c3d34b3bc8"),
+                'id' => env('MAILCHIMP_LIST_ID', "b5a99e2573"),
             ],
         ],
         'ssl' => false,
