@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Newsletter;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -36,14 +37,18 @@ class RegisterController extends Controller
         return property_exists( $this, 'redirectTo' ) ? $this->redirectTo : '/dashboard';
     }
 
-    protected function registered( Request $request, $user )
-    {
-        return response()->json( [
-            'status'   => 'success',
-            'message'  => "Registration Successful",
-            'redirect' => $request->has( "redirect" ) && !empty( $request->redirect ) ? $request->redirect : $this->redirectTo
-        ] );
-    }
+    // protected function registered( Request $request, $user )
+    // {
+    //     $credentials = $request->only('email', 'password');
+    //
+    //     if (Auth::guard()->attempt($credentials, $request->filled('remember'))) {
+    //       return response()->json( [
+    //           'status'   => 'success',
+    //           'message'  => "Registration Successful",
+    //           'redirect' => $request->has( "redirect" ) && !empty( $request->redirect ) ? $request->redirect : $this->redirectTo
+    //       ] );
+    //     }
+    // }
 
     /**
      * Get a validator for an incoming registration request.
@@ -85,14 +90,14 @@ class RegisterController extends Controller
         ]);
 
         /* Generate new welcome notification */
-        $admin = User::where('role', 'admin')->first();
-        $message = "Thank you for joining Sagegroupy! We just wanted to send you a quick welcome message to introduce you to the notifcations dashboard. We hope you enjoy our platform!";
-        event( new \App\Events\UserMessageEvent( $admin, $user, 'Welcome to SageGroupy', $message, "user-message" ) );
-        /* Send admin email */
-        \Mail::to( env( "ADMIN_EMAIL" ) )
-            ->send( new \App\Mail\PrelaunchAdminNotification( $data['email'], "Not Available" ) );
-        /* Subscribe to mailchimp list */
-        Newsletter::subscribe( $data['email'] );
+        // $admin = User::where('role', 'admin')->first();
+        // $message = "Thank you for joining Sagegroupy! We just wanted to send you a quick welcome message to introduce you to the notifcations dashboard. We hope you enjoy our platform!";
+        // event( new \App\Events\UserMessageEvent( $admin, $user, 'Welcome to SageGroupy', $message, "user-message" ) );
+        // /* Send admin email */
+        // \Mail::to( env( "ADMIN_EMAIL" ) )
+        //     ->send( new \App\Mail\PrelaunchAdminNotification( $data['email'], "Not Available" ) );
+        // /* Subscribe to mailchimp list */
+        // Newsletter::subscribe( $data['email'] );
 
         return $user;
     }

@@ -137,8 +137,10 @@ const app = new Vue({
         var vm = this;
         $(document).ready(function () {
             $('body').removeClass("bg-white").removeClass("md-theme-default").css("background-color", '#f5faf8');
+
         });
 
+        // setTimeout(vm.makePdf(), 5000);
 
 		this.$nextTick(function () {
 			window.addEventListener('resize', this.getWindowWidth);
@@ -153,6 +155,8 @@ const app = new Vue({
     created() {
   		this.getWindowWidth();
   		this.getWindowHeight();
+
+      setTimeout(this.makePdf, 500);
 
       if (this.shared.state.window_width <= 768) {
           this.shared.state.menu_open = false;

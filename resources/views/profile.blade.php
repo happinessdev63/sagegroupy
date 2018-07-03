@@ -11,6 +11,10 @@
 		window.sageSource.profile = <?php echo json_encode( $user ); ?>;
 		window.sageSource.curPage = 'viewProfile';
     </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 @endsection
 
 @section('extras')
@@ -66,16 +70,12 @@
             </div>
 
             <div class="text-center margin-bottom-10">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Profiles Responsive -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-6500659003306107"
                      data-ad-slot="1323909011"
                      data-ad-format="auto"></ins>
-                <script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
 

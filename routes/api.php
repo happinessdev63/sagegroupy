@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 /* All routes within this group will be prepended with /apiv1/ */
 Route::post('login', 'Api\AuthController@login');
-Route::post('register', 'Auth\RegisterController@register');
 // Route::post('register', function() {
 //   dd("OK");die();
 // });

@@ -18,7 +18,7 @@
         <div>
             <img src="/img/logo_xs.png"/>
             <h4 class="font-weight-300">Create a New Account</h4>
-            <sage-register redirect-url="<?php echo e(Request::get("r",Session::get('url.intended', url('/dashboard')))); ?>"></sage-register>
+            <sage-register _token="<?php echo e(csrf_token()); ?>" redirect-url="<?php echo e(Request::get("r",Session::get('url.intended', url('/dashboard')))); ?>"></sage-register>
         </div>
         <div class="clearfix"></div>
     </md-whiteframe>

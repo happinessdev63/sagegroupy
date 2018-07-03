@@ -13,16 +13,12 @@
 
     <sage-full-modal ref="agencyFreelancerSearchModal" name="agencyFreelancerSearchModal" title="Search For Freelancers">
         <div class="text-center col-lg-12 visible-sm">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Agencies Responsive -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6500659003306107"
                  data-ad-slot="3697833055"
                  data-ad-format="auto"></ins>
-            <script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
 
         <div class="col-lg-10 col-sm-12">
@@ -35,16 +31,12 @@
         </div>
 
         <div class="text-center col-lg-2 hidden-sm">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Agencies Responsive -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6500659003306107"
                  data-ad-slot="3697833055"
                  data-ad-format="auto"></ins>
-            <script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </sage-full-modal>
 
@@ -70,5 +62,10 @@
             $(".sageImage").fancybox();
         });
     </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

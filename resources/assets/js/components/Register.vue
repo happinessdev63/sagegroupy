@@ -7,22 +7,23 @@ Properties: redirect-url [Where to redirect after a successful login]
 
 <template>
     <form novalidate @submit.stop.prevent="submit">
+    <!-- <form novalidate action="/register" method="post"> -->
 
         <md-input-container v-bind:class="{ 'md-input-invalid' : errors.name  }">
             <label>Name</label>
-            <md-input type="text" required  v-model="form.name"></md-input>
+            <md-input type="text" name="name" required  v-model="form.name"></md-input>
             <span v-if="errors.name" class="md-error">{{ errors.name[0] }}</span>
         </md-input-container>
 
         <md-input-container v-bind:class="{ 'md-input-invalid' : errors.email  }">
             <label>Email</label>
-            <md-input type="text" required  v-model="form.email"></md-input>
+            <md-input type="text" name="email" required  v-model="form.email"></md-input>
             <span v-if="errors.email" class="md-error">{{ errors.email[0] }}</span>
         </md-input-container>
 
         <md-input-container v-bind:class="{ 'md-input-invalid' : errors.password  }">
             <label>Password</label>
-            <md-input type="password" required v-model="form.password"></md-input>
+            <md-input type="password" name="password" required v-model="form.password"></md-input>
             <span v-if="errors.password" class="md-error">{{ errors.password[0] }}</span>
         </md-input-container>
 
@@ -42,7 +43,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             <md-spinner :md-size="10" md-indeterminate class="md-accent margin-top-10 margin-left-5"></md-spinner>
         </md-button>
 
-        <md-button v-if="!state.loggingIn" @click="register()" class="md-raised md-primary">Sign Up</md-button>
+        <md-button v-if="!state.loggingIn" type="submit" @click="register()" class="md-raised md-primary">Sign Up</md-button>
 
         <p class="margin-top-10">Aready have an account? <a href="/login" class="link-primary">Login</a></p>
     </form>
@@ -54,7 +55,7 @@ Properties: redirect-url [Where to redirect after a successful login]
         mounted() {
             console.log('Register component ready.')
         },
-        props: ['redirectUrl'],
+        props: ['redirectUrl', 'token'],
         data() {
             return {
                 errors: {
@@ -70,6 +71,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                     password_confirmation: null,
                     type: 'freelancer',
                     redirect: this.redirectUrl,
+                    _token: this._token,
                 },
                 state: {
                     loggingIn: false
@@ -80,11 +82,10 @@ Properties: redirect-url [Where to redirect after a successful login]
             register: function () {
                 this.errors = {}
                 this.state.loggingIn = true;
-
-                this.$http.post('/apiv1/register', this.form).then((response) => {
+                this.$http.post('/register', this.form).then((response) => {
                     console.log(response);
                     this.state.loggingIn = false;
-                    // window.location = response.body.redirect;
+                    window.location = this.redirectUrl;
                 }, (response) => {
                     console.log(response);
                     this.state.loggingIn = false;

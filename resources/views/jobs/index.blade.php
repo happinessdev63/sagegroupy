@@ -58,16 +58,12 @@ Trying to get property of non-object (View: /vagrant/saje/resources/views/jobs/i
             @endif
         </div>
         <div class="text-center margin-bottom-10">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Jobs Responsive -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6500659003306107"
                  data-ad-slot="6209404182"
                  data-ad-format="auto"></ins>
-            <script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
 
     </div>
@@ -293,5 +289,9 @@ Trying to get property of non-object (View: /vagrant/saje/resources/views/jobs/i
 		$(document).ready(function () {
 			$(".sageImage").fancybox();
 		});
+    </script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+(adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 @endsection

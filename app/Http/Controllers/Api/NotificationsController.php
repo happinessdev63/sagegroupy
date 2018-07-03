@@ -360,22 +360,23 @@ class NotificationsController extends Controller
     public function updateStatus( Request $request, Notification $notification, $status )
     {
         $notification->status = $status;
-
-        if ($notification->save()) {
-            return response()->json( [
-                'message' => "Notification has been updated successfully.",
-                'new'     => false,
-                'status'  => "success",
-                'results' => $notification
-            ] );
-        }
-
-        return response()->json( [
-            'message' => "Error archiving notification. Please Try Again.",
-            'status'  => "error"
-        ],
-            Response::HTTP_UNPROCESSABLE_ENTITY
-        );
+        dd($notification);die();
+        //
+        // if ($notification->save()) {
+        //     return response()->json( [
+        //         'message' => "Notification has been updated successfully.",
+        //         'new'     => false,
+        //         'status'  => "success",
+        //         'results' => $notification
+        //     ] );
+        // }
+        //
+        // return response()->json( [
+        //     'message' => "Error archiving notification. Please Try Again.",
+        //     'status'  => "error"
+        // ],
+        //     Response::HTTP_UNPROCESSABLE_ENTITY
+        // );
 
     }
 

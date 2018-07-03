@@ -197,7 +197,7 @@
               <div class="col-sm-9">
                 <div style="position:relative; float:right; width: 20%; height: 20%;" id="companyLogo">
                     <img src="{{ asset('/img/logo_xs.png') }}" style="width:100%"/>
-                    <md-button @click="$root.emitEvent('editAvatar')" class="md-transparent font-size-10 margin-left-5">Edit Avatar</md-button>
+                    <!-- <md-button @click="$root.emitEvent('editAvatar')" class="md-transparent font-size-10 margin-left-5">Edit Avatar</md-button> -->
                     <a style="color: rgba(0, 150, 136, 0.95); font-size: 10px; padding-left: 0px; text-decoration: none;" href="/profile/{{ $user->id }}">
                       View on SageGroupy
                     </a>
@@ -290,7 +290,7 @@
                     </md-list-item>
                     @endforeach
                 </md-list>
-                <md-button class="md-raised md-primary pull-right" id="startBtn" @click="makePdf()">Download</md-button>
+                <!-- <md-button class="md-raised md-primary pull-right" id="startBtn" @click="makePdf()">Download</md-button> -->
             </div>
           </div>
       </div>

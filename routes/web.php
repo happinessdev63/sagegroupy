@@ -58,6 +58,7 @@ Route::post( '/prelaunchSurvey', 'HomeController@prelaunchSurvey' );
 Route::get( '/prelaunch', 'HomeController@prelaunch' );
 Route::get( '/share/{email}', 'HomeController@share' );
 Route::get( '/previewEmail/{email}', 'HomeController@previewEmail' );
+// Route::post('register', 'Auth\RegisterController@register');
 
 /* Admin Routes */
 Route::get( '/admin/users', 'Admin\UsersController@index' )->middleware( [ 'auth', 'adminOnly' ] );

@@ -20,7 +20,7 @@
         <div>
             <img src="/img/logo_xs.png"/>
             <h4 class="font-weight-300">Create a New Account</h4>
-            <sage-register redirect-url="{{ Request::get("r",Session::get('url.intended', url('/dashboard'))) }}"></sage-register>
+            <sage-register _token="{{ csrf_token() }}" redirect-url="{{ Request::get("r",Session::get('url.intended', url('/dashboard'))) }}"></sage-register>
         </div>
         <div class="clearfix"></div>
     </md-whiteframe>

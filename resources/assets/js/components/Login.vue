@@ -65,7 +65,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                 this.state.loggingIn = true;
                 // alert(window.Laravel.apiToken);
                 this.$http.post('/login', this.form).then((response) => {
-                  console.log(response);
+                    console.log(response);
                     this.state.loggingIn = false;
                     window.location = this.redirectUrl;
                 }, (response) => {

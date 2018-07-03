@@ -19,6 +19,7 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
+        // dd(session()->all());die();
         return property_exists( $this, 'redirectTo' ) ? $this->redirectTo : '/dashboard';
     }
 

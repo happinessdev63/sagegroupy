@@ -286,13 +286,12 @@ Usage: <sage-create-job> </sage-create-job>
 
                 this.errors = {}
                 this.state.saving = true;
-                alert();
                 if (!this.jobData.id) {
-                    var apiUrl = '/apiv1/jobs/create/';
+                    var apiUrl = '/apiv1/jobs/create';
                 } else {
                     var apiUrl = '/apiv1/jobs/update/' + this.jobData.id;
                 }
-
+                // this.$http({method: 'POST', 'url': apiUrl, 'data': this.jobData}).then((response) => {
                 this.$http.post(apiUrl, this.jobData).then((response) => {
                     this.state.saving = false;
 

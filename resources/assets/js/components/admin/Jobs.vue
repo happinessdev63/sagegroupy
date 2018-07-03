@@ -140,7 +140,7 @@
                             {{ job.created_at }}
                         </span>
 
-                        <md-button v-if="user.is_admin" target="blank" :href="jobLink(job)" class="md-icon-button">
+                        <md-button target="blank" :href="jobLink(job)" class="md-icon-button">
                         <md-icon>assignment</md-icon>
                         </md-button>
 

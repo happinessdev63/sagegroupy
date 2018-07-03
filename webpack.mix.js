@@ -23,7 +23,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .js('resources/assets/js/lander.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
   // .styles('./node_modules/vue-material/dist/vue-material.css')
-   .styles(['resources/assets/css/sage.css', 'resources/assets/css/style.css', 'resources/assets/css/icons.css'], 'public/css/sage.css')
-   .copy('storage/app/public', 'public/storage')
-   .copy('resources/assets/css/emails.css' ,'public/css/emails.css')
-   .copy('resources/assets/js/plugins', 'public/js/plugins');
+   // .styles(['resources/assets/css/sage.css', 'resources/assets/css/style.css', 'resources/assets/css/icons.css'], 'public/css/sage.css')
+   // // .copy('storage/app/public', 'public/storage')
+   // .copy('resources/assets/css/emails.css' ,'public/css/emails.css')
+   // .copy('resources/assets/js/plugins', 'public/js/plugins');
