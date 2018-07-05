@@ -33,14 +33,14 @@
 <div class="row">
     <div class="col-lg-12 col-sm-12 padding-bottom-20 tour-agencies" id='search_option'>
       <md-whiteframe md-elevation="3" class="padding-4 bg-white">
-        <md-tabs>
+        <md-tabs id="allTab">
           <md-tab id="freelancer" md-label="Freelancer" md-icon="perm_contact_calendar" :md-active = "'{{ $role }}' === 'freelancer'">
             <div>
                 <sage-freelancer-list ></sage-freelancer-list>
             </div>
           </md-tab>
-          <md-tab id="job" md-label="Job" md-icon="work" :md-active="'{{ $role }}' === 'job'">
-            <div>
+          <md-tab id="job" md-label="Job" md-icon="work" :md-active="'{{ $role }}' == 'job'">
+            <div id="jobTab">
                 <sage-admin-jobs ref="admin-users"></sage-admin-jobs>
             </div>
           </md-tab>
@@ -77,14 +77,20 @@
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#jobTab").css('margin-top','40px');
+
             $(".sageImage").fancybox();
 
             /* Share button is NOT working when rednered in modal, isntead we will render it on page and move it to the modal */
-			$('.shareButton').hide();
+      			$('.shareButton').hide();
 
-			setTimeout(function () {
-				$('.shareButton').detach().appendTo('.shareButtonHolder').show();
-			}, 1300);
+      			setTimeout(function () {
+      				$('.shareButton').detach().appendTo('.shareButtonHolder').show();
+      			}, 1300);
+        });
+
+        $(".md-tab-header").click(function() {
+            $("#jobTab").css('margin-top', '0');
         });
 
     </script>
