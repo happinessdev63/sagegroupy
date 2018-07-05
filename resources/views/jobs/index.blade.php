@@ -86,10 +86,10 @@ Trying to get property of non-object (View: /vagrant/saje/resources/views/jobs/i
                     <h3 class="no-margin-top no-padding-top margin-bottom-5 pull-left">{{ $job->title }}</h3>
                     <div class="pull-right">
                         @if ($job->type != "reference")
-                            <span class="text-muted margin-top-10">Posted {{ $job->created_at->diffForHumans() }}</span><br/>
+                            <!-- <span class="text-muted margin-top-10">Posted {{ $job->created_at->diffForHumans() }}</span><br/> -->
                             <label class="label label-primary  margin-top-10 padding-5">Payment: {{ $job->nicePaymentTerms }} </label>
                         @else
-                            <span class="text-muted margin-top-10">Created {{ $job->created_at->diffForHumans() }}</span><br/>
+                            <!-- <span class="text-muted margin-top-10">Created {{ $job->created_at->diffForHumans() }}</span><br/> -->
                             <label class="label label-primary  margin-top-10 padding-5">Reference Job </label>
                         @endif
                     </div>
@@ -164,7 +164,7 @@ Trying to get property of non-object (View: /vagrant/saje/resources/views/jobs/i
                             <md-card md-with-hover>
                                 <md-card-header>
                                     <div class="text-strong  font-size-16">{{ str_limit($media->pivot->name, 18) }}</div>
-                                    <div class="md-subhead">{{ $media->created_at->diffForHumans() }}</div>
+                                    <!-- <div class="md-subhead">{{ $media->created_at->diffForHumans() }}</div> -->
                                 </md-card-header>
 
                                 <md-card-media md-ratio="16:9">
