@@ -137,16 +137,16 @@ class HandleJobInviteResponse
                 $event->job->freelancer_id = $event->freelancer->id;
                 $event->job->public = 0;
                 $event->job->save();
-                $message = "Job - `" .$event->job->title ."` was just awarded to you";
+                $message = "This job was just awarded to you";
 
                 $jobNotification = Notification::create( [
                     'type'         => "job-invite",
                     'to_user_id'   => $event->freelancer->id,
                     'job_id'       => $event->job->id,
-                    'from_user_id' => $event->freelancer->id,
+                    'from_user_id' => $event->client->id,
                     'owner_id'     => $event->freelancer->id,
                     'status'       => 'unread',
-                    'title'        => ""$event->freelancer->name . " Accepted Your Job Invite",
+                    'title'        => "Offer from ".$event->client->name,
                     'message'      => $message,
                     'owner_type'   => 'user'
                 ] );

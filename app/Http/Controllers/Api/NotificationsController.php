@@ -676,7 +676,6 @@ class NotificationsController extends Controller
      */
     public function awardJob( Request $request, Notification $notification )
     {
-
         if ( empty( $notification->job_id ) ) {
             return response()->json( [
                 'message' => "Error accepting invite, invalid job id provided.",
@@ -701,7 +700,7 @@ class NotificationsController extends Controller
                   ->where('job_id', $notification->job_id)
                   ->select('freelancer_id')
                   ->first();
-        $freelancer = User::where('id', $query->freelancer_id)->last();
+        $freelancer = User::where('id', $query->freelancer_id)->first();
 
         event( new \App\Events\JobInviteResponseEvent( $notification->job, $notification->sender, $freelancer, "award" ) );
 

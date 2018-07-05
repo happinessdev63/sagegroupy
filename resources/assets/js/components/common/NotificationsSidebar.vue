@@ -86,7 +86,7 @@
                                 <p class="padding-5 padding-top-15">{{ shared.notification.message }}</p>
                                 <div class="margin-top-1 text-center">
                                     <md-button class="md-primary md-adj-width" @click="openChat(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id">
+                                               v-if="shared.notification.type == 'job-invite' && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id && shared.notification.nice_title.indexOf('Offer') <0 ">
                                         <md-icon clas="md-primary">chat_bubble</md-icon>
                                         <span>Message Client</span>
                                     </md-button>
@@ -114,26 +114,26 @@
 
                                     <!-- Agency Job Invites -->
                                     <md-button class="md-primary md-adj-width" @click="acceptJobInvite(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && shared.notification.agency_id && owner == shared.notification.owner_id">
+                                               v-if="shared.notification.type == 'job-invite' && shared.notification.agency_id && owner == shared.notification.owner_id && shared.notification.nice_title.indexOf('Offer') < 0 ">
                                         <md-icon clas="md-primary">event_available</md-icon>
                                         <span>Accept Invite</span>
                                     </md-button>
 
                                     <md-button class="md-primary md-adj-width" @click="rejectJobInvite(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && shared.notification.agency_id && owner == shared.notification.owner_id">
+                                               v-if="shared.notification.type == 'job-invite' && shared.notification.agency_id && owner == shared.notification.owner_id && shared.notification.nice_title.indexOf('Offer') < 0 ">
                                         <md-icon clas="md-primary">event_busy</md-icon>
                                         <span>Reject Invite</span>
                                     </md-button>
                                     <!-- End Agency Job Invites -->
 
                                     <md-button class="md-primary md-adj-width" @click="acceptJobInvite(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id">
+                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id && shared.notification.nice_title.indexOf('Offer') < 0 ">
                                         <md-icon clas="md-primary">event_available</md-icon>
                                         <span>Accept Invite</span>
                                     </md-button>
 
                                     <md-button class="md-primary md-adj-width" @click="rejectJobInvite(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id">
+                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.job.client_id != shared.notification.owner_id && shared.notification.nice_title.indexOf('Offer') < 0 ">
                                         <md-icon clas="md-primary">event_busy</md-icon>
                                         <span>Reject Invite</span>
                                     </md-button>
@@ -150,7 +150,7 @@
                                     </md-button>
 
                                     <md-button class="md-primary md-adj-width" @click="awardJob(shared.notification)"
-                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.nice_title.indexOf('Accepted Your Job Invite') > 0">
+                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.nice_title.indexOf('Accepted Your Job Invite') > 0 && shared.notification.nice_message.indexOf('however you already') < 0">
                                         <md-icon clas="md-primary">event_available</md-icon>
                                         <span>Award Job</span>
                                     </md-button>
@@ -382,6 +382,7 @@
 				this.$refs['delete-notification'].open();
 			},
 			acceptJobInvite(notification) {
+        console.log(notification);
 				var apiUrl = '/apiv1/notifications/acceptJobInvite/' + notification.id;
 				this.$http.post(apiUrl).then((response) => {
 					this.$root.showNotification(response.body.message);
@@ -411,10 +412,10 @@
 				var apiUrl = '/apiv1/notifications/awardJob/' + notification.id;
 				this.$http.post(apiUrl).then((response) => {
 					this.$root.showNotification(response.body.message);
-					// setTimeout(() => {
+					setTimeout(() => {
 						this.updateStatus(notification, "archived");
 						this.refreshNotifications();
-					// }, 3000);
+					}, 3000);
 				}, (response) => {
 					this.$root.showNotification(response.body.message);
 				});

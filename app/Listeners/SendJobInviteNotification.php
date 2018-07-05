@@ -48,7 +48,7 @@ class SendJobInviteNotification
             'from_user_id'   => $event->client->id,
             'owner_id'       => $event->freelancer->id,
             'status'         => 'unread',
-            'title'          => "You've Been Invited to A Job - \"" . $event->job->title . "\"",
+            'title'          => "You've been invited to this job - \"" . $event->job->title . "\"",
             'message'        => "You were invited to apply for this job. Please either accept or decline this invitation as soon as possible. \n\n Message from client: " . $event->message,
             'owner_type'     => 'user'
         ] );
