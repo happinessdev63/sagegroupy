@@ -108,12 +108,10 @@ class HandleJobInviteResponse
         switch ($event->response) {
             case "accept":
 
-                $inviteStatus = "accepted";
+                $inviteStatus = "applied";
 
-                if ( !$event->job->freelancer_id ) {
-                    $event->job->freelancer_id = $event->freelancer->id;
-                    $event->job->save();
-                    $message = $event->freelancer->first_name . " accepted your job invite. They have now been assigned as an active freelancer.";
+                if( !$event->job->freelancer_id ){
+                    $message = $event->freelancer->first_name . " accepted your job invite.";
                 } else {
                     $message = $event->freelancer->first_name . " accepted your job invite, however you already have an active freelancer assigned to the job. The job cannot be reassigned unless the active freelancer is removed.";
                 }
@@ -130,6 +128,29 @@ class HandleJobInviteResponse
                     'owner_type'   => 'user'
                 ] );
 
+                break;
+
+            case "award":
+
+                $inviteStatus = "accepted";
+            // if ( !$event->job->freelancer_id ) {
+                $event->job->freelancer_id = $event->freelancer->id;
+                $event->job->public = 0;
+                $event->job->save();
+                $message = "Job - `" .$event->job->title ."` was just awarded to you";
+
+                $jobNotification = Notification::create( [
+                    'type'         => "job-invite",
+                    'to_user_id'   => $event->freelancer->id,
+                    'job_id'       => $event->job->id,
+                    'from_user_id' => $event->freelancer->id,
+                    'owner_id'     => $event->freelancer->id,
+                    'status'       => 'unread',
+                    'title'        => ""$event->freelancer->name . " Accepted Your Job Invite",
+                    'message'      => $message,
+                    'owner_type'   => 'user'
+                ] );
+
 
                 break;
 
@@ -139,7 +160,7 @@ class HandleJobInviteResponse
 
                 $jobNotification = Notification::create( [
                     'type'         => "job-invite",
-                    'to_user_id'   => $event->client->id,
+                    'to_user_id'   => $event->freelancer->id,
                     'job_id'       => $event->job->id,
                     'from_user_id' => $event->client->id,
                     'owner_id'     => $event->client->id,

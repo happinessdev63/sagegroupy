@@ -185,9 +185,8 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
+    public function search(Request $request, $id = 'freelancer')
     {
-
         $user = \Auth::user();
         $user->load(
             "clientJobs",
@@ -211,10 +210,11 @@ class ProfileController extends Controller
         } else {
             $job = null;
         }
-        // dd($user);die();
+
         return view( 'findFreelancer', [
             'user' => $user,
-            'job'  => $job
+            'job'  => $job,
+            'role' => $id,
         ] );
     }
 
@@ -311,22 +311,6 @@ class ProfileController extends Controller
             'recommendations.owner',
             'recommendations.freelancer'
         )->first();
-        // // return view("admin.agencies");
-        // // return view( 'profile', [
-        // //     'user' => $user
-        // // ]);
-        // $html = view('profile.pdfTemplate', [ 'user'->$user ])->render();
-        // dd($html);die();
-        // // return response()->json( [
-        // //     'message' => "Error deleting recommendation. Please try again."
-        // // ],
-        // //     Response::HTTP_UNPROCESSABLE_ENTITY
-        // // );
-        // $items = DB::table("items")->get();
-        // view()->share('items',$items);
-        // dd($user->avatar);die();
-        // $pdf = PDF::loadView('pdfview', [ 'user' => $user ]);
-        // return $pdf->download('pdfview.pdf');
 
         return view('pdfview', [ 'user' => $user ]);
     }

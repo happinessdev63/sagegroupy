@@ -14,7 +14,7 @@ Properties: redirect-url [Where to redirect after a successful login]
                 v-model="cropper.show"
                 :width="300"
                 :height="300"
-                url="/apiv1/files/avatar"
+                url="/apiv1/files/avatar/"
                 lang-type='en'
                 :params="cropper.params"
                 img-format="png">
@@ -452,6 +452,7 @@ Properties: redirect-url [Where to redirect after a successful login]
             });
 
 			appBus.$on('editAvatar', function (ref) {
+        console.log(ref);
 				vm.toggleCropper();
 			});
 

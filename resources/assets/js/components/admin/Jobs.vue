@@ -102,7 +102,8 @@
                     <md-table-head md-sort-by="agency">Agency</md-table-head>
                     <md-table-head md-sort-by="type">Type</md-table-head>
                     <md-table-head md-sort-by="completed">Status</md-table-head>
-                    <md-table-head md-sort-by="created_at">Created At</md-table-head>
+                    <md-table-head v-if="user.is_admin" md-sort-by="created_at">Created At</md-table-head>
+                    <md-table-head>Action</md-table-head>
                 </md-table-row>
             </md-table-header>
 
@@ -135,13 +136,15 @@
                         <span v-if="job.completed != '1'" class="label label-primary pading-10-5">{{ job.status|capitalize }}</span>
                         <span v-else class="label label-primary pading-10-5">Completed</span>
                     </md-table-cell>
-                    <md-table-cell>
+                    <md-table-cell v-if="user.is_admin">
                         <span>
                             {{ job.created_at }}
                         </span>
+                    </md-table-cell>
+                    <md-table-cell>
 
                         <md-button target="blank" :href="jobLink(job)" class="md-icon-button">
-                        <md-icon>assignment</md-icon>
+                          <md-icon>assignment</md-icon>
                         </md-button>
 
                         <md-button v-if="user.is_admin" class="md-icon-button" @click="confirmDelete(job)">

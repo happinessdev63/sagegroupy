@@ -83,6 +83,7 @@ Route::get('/profile/postPdf/{userId}', 'ProfileController@downloadToPdf');
 Route::get('/profile/{user}', 'ProfileController@viewProfile');
 Route::get('/p/{shareId}', 'ProfileController@viewProfileShareId');
 Route::get('/profile/edit/{user}', 'ProfileController@profileEdit')->middleware( [ 'auth' ] );
+Route::get( '/search/{id}', 'ProfileController@search' )->middleware( [ 'auth' ] );
 Route::get( '/search', 'ProfileController@search' )->middleware( [ 'auth' ] );
 /* References */
 Route::get( '/generalReference/{generalReference}', 'ProfileController@viewGeneralReference' );

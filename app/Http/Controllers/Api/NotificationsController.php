@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Notification;
+use App\Invite;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -360,23 +361,22 @@ class NotificationsController extends Controller
     public function updateStatus( Request $request, Notification $notification, $status )
     {
         $notification->status = $status;
-        dd($notification);die();
         //
-        // if ($notification->save()) {
-        //     return response()->json( [
-        //         'message' => "Notification has been updated successfully.",
-        //         'new'     => false,
-        //         'status'  => "success",
-        //         'results' => $notification
-        //     ] );
-        // }
-        //
-        // return response()->json( [
-        //     'message' => "Error archiving notification. Please Try Again.",
-        //     'status'  => "error"
-        // ],
-        //     Response::HTTP_UNPROCESSABLE_ENTITY
-        // );
+        if ($notification->save()) {
+            return response()->json( [
+                'message' => "Notification has been updated successfully.",
+                'new'     => false,
+                'status'  => "success",
+                'results' => $notification
+            ] );
+        }
+
+        return response()->json( [
+            'message' => "Error archiving notification. Please Try Again.",
+            'status'  => "error"
+        ],
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
 
     }
 
@@ -487,26 +487,26 @@ class NotificationsController extends Controller
     public function rejectInvite( Request $request, Notification $notification )
     {
 
-        if ( empty( $notification->agency_id ) ) {
-            return response()->json( [
-                'message' => "Error rejecting invite, invalid agency.",
-                'status'  => "error"
-            ],
-                Response::HTTP_UNPROCESSABLE_ENTITY
-            );
-        }
-
-        $notification->load( "agency", "receiver" );
-        if ( !$notification->agency || !$notification->receiver ) {
-            return response()->json( [
-                'message' => "Error rejecting invite, invalid agency.",
-                'status'  => "error"
-            ],
-                Response::HTTP_UNPROCESSABLE_ENTITY
-            );
-        }
-
-        event( new \App\Events\AgencyInviteResponseEvent( $notification->agency, $notification->receiver, "reject" ) );
+        // if ( empty( $notification->agency_id ) ) {
+        //     return response()->json( [
+        //         'message' => "Error rejecting invite, invalid agency.",
+        //         'status'  => "error"
+        //     ],
+        //         Response::HTTP_UNPROCESSABLE_ENTITY
+        //     );
+        // }
+        //
+        // $notification->load( "agency", "receiver" );
+        // if ( !$notification->agency || !$notification->receiver ) {
+        //     return response()->json( [
+        //         'message' => "Error rejecting invite, invalid agency.",
+        //         'status'  => "error"
+        //     ],
+        //         Response::HTTP_UNPROCESSABLE_ENTITY
+        //     );
+        // }
+        //
+        // event( new \App\Events\AgencyInviteResponseEvent( $notification->agency, $notification->receiver, "reject" ) );
 
         return response()->json( [
             'message' => "Invitation has been rejected and the agency has been notified",
@@ -605,7 +605,7 @@ class NotificationsController extends Controller
 
 
         return response()->json( [
-            'message' => "Invitation has been accepted, this job has now been added to your list of active jobs.",
+            'message' => "Invitation has been accepted, you will offer this job from client soon",
             'new'     => false,
             'status'  => "success",
             'results' => $notification
@@ -662,6 +662,51 @@ class NotificationsController extends Controller
 
         return response()->json( [
             'message' => "Invitation has been rejected and the client has been notified.",
+            'new'     => false,
+            'status'  => "success",
+            'results' => $notification
+        ] );
+
+    }
+    /**
+     * Award a job to freelancer.
+     * @param Request $request
+     * @param Notification $notification
+     * @return mixed
+     */
+    public function awardJob( Request $request, Notification $notification )
+    {
+
+        if ( empty( $notification->job_id ) ) {
+            return response()->json( [
+                'message' => "Error accepting invite, invalid job id provided.",
+                'status'  => "error"
+            ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        $notification->load( "job", "receiver", "sender" );
+
+        if ( !$notification->job || !$notification->receiver || !$notification->sender ) {
+            return response()->json( [
+                'message' => "Error accepting invite, invalid job or client.",
+                'status'  => "error"
+            ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        $query = DB::table('invites')
+                  ->where('job_id', $notification->job_id)
+                  ->select('freelancer_id')
+                  ->first();
+        $freelancer = User::where('id', $query->freelancer_id)->last();
+
+        event( new \App\Events\JobInviteResponseEvent( $notification->job, $notification->sender, $freelancer, "award" ) );
+
+        return response()->json( [
+            'message' => "This job was awarded to your freelancer successfully.",
             'new'     => false,
             'status'  => "success",
             'results' => $notification

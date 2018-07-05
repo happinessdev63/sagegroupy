@@ -279,7 +279,7 @@
                                         <ul class="site-menu">
                                             <li class="site-menu-category">Jobs</li>
                                             <li class="site-menu-item" :class="getNavClass('search')">
-                                                <a class="animsition-link" href="/search" >
+                                                <a class="animsition-link" href="/search/job" >
                                                     <i class="md-icon material-icons site-menu-icon md-theme-default">find_in_page</i>
                                                     <span class="site-menu-title">Find a Job</span>
                                                 </a>
@@ -329,7 +329,7 @@
                                             <ul class="site-menu">
                                                 <li class="site-menu-category">Hire</li>
                                                 <li class="site-menu-item" :class="getNavClass('search')">
-                                                    <a class="animsition-link" href="/search" >
+                                                    <a class="animsition-link" href="/search/freelancer" >
                                                         <i class="md-icon material-icons site-menu-icon md-theme-default">assignment_ind</i>
                                                         <span class="site-menu-title">Find a Freelancer</span>
                                                     </a>
@@ -374,9 +374,18 @@
                                    data-original-title="Settings">
                                     <i class="md-icon material-icons site-menu-icon md-theme-default">settings</i>
                                 </a>
-                                <a href="/search" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
-                                    <i class="md-icon material-icons site-menu-icon md-theme-default">search</i>
-                                </a>
+                                <?php if(Auth::user() && Auth::user()->role == 'admin' || Auth::user()->role == 'client_freelancer' || Auth::user()->role == 'client'): ?>
+                                  <a href="/search/freelancer" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
+                                      <i class="md-icon material-icons site-menu-icon md-theme-default">search</i>
+                                  </a>
+                                <?php endif; ?>
+
+                                <?php if(Auth::user() && Auth::user()->role == 'freelancer'): ?>
+                                  <a href="/search/job" data-placement="top" data-toggle="tooltip" data-original-title="Lock">
+                                      <i class="md-icon material-icons site-menu-icon md-theme-default">search</i>
+                                  </a>
+                                <?php endif; ?>
+
                                 <a href="/logout" data-placement="top" data-toggle="tooltip" data-original-title="Logout">
                                     <i class="md-icon material-icons site-menu-icon md-theme-default">power_settings_new</i>
                                 </a>

@@ -101,6 +101,7 @@ Vue.component('sage-become-freelancer', require('./components/client/BecomeFreel
 Vue.component('sage-skills-modal', require('./components/profile/SkillsModal.vue'));
 Vue.component('sage-edit-media', require('./components/common/EditMedia.vue'));
 Vue.component('sage-freelancer-list', require('./components/freelancer/Freelancers.vue'));
+Vue.component('sage-image-cropper-only', require('./components/profile/DownloadProfile.vue'));
 
 /* Register agency components */
 Vue.component('sage-create-agency', require('./components/agencies/CreateAgency.vue'));
@@ -156,8 +157,6 @@ const app = new Vue({
   		this.getWindowWidth();
   		this.getWindowHeight();
 
-      setTimeout(this.makePdf, 500);
-
       if (this.shared.state.window_width <= 768) {
           this.shared.state.menu_open = false;
       }
@@ -179,13 +178,13 @@ const app = new Vue({
         ],
     },
 	watch: {
-		'shared.state.menu_open': function () {
-			if (this.shared.state.menu_open) {
-			    $('body').removeClass('site-menubar-fold').addClass('site-menubar-unfold');
-            } else {
-				$('body').removeClass('site-menubar-unfold').addClass('site-menubar-fold');
-            }
-		}
+    		'shared.state.menu_open': function () {
+    			if (this.shared.state.menu_open) {
+    			    $('body').removeClass('site-menubar-fold').addClass('site-menubar-unfold');
+                } else {
+    				$('body').removeClass('site-menubar-unfold').addClass('site-menubar-fold');
+                }
+    		}
 	},
     computed: {
         notificationsLabel() {
@@ -193,16 +192,16 @@ const app = new Vue({
         }
     },
     methods: {
-		getWindowWidth(event) {
-			this.shared.state.window_width = document.documentElement.clientWidth;
-			if (this.shared.state.window_width <= 1024) {
-				this.shared.state.menu_open = false;
-			}
-		},
+    		getWindowWidth(event) {
+    			this.shared.state.window_width = document.documentElement.clientWidth;
+    			if (this.shared.state.window_width <= 1024) {
+    				this.shared.state.menu_open = false;
+    			}
+    		},
 
-		getWindowHeight(event) {
-			this.shared.state.window_height = document.documentElement.clientHeight;
-		},
+    		getWindowHeight(event) {
+    			this.shared.state.window_height = document.documentElement.clientHeight;
+    		},
         hasMedia(job) {
             if (job.media && job.media.length > 0) {
                 return true;
@@ -343,6 +342,7 @@ const app = new Vue({
     },
     makePdf() {
         $('#startBtn').hide();
+        $('#changeLogo').hide();
         let htmlContent = $('#profile')[0];
         var opt = {
           margin:       0.3,

@@ -61,7 +61,7 @@ class FilesController extends Controller
      * @param string $folder
      * @return
      */
-    public function avatar( Request $request )
+    public function avatar( Request $request, $id = 'userlogo')
     {
 
         $userFilePath = \Auth::guard('api')->user()->filePath( "avatar" );
@@ -70,7 +70,7 @@ class FilesController extends Controller
             ->toDirectory( $userFilePath )
             ->upload();
 
-        if ( $media ) {
+        if ( $media && $id == 'userlogo') {
 
             /* Attach to user */
             \Auth::guard('api')->user()->syncMediaExtra( $media->getKey(), "avatar", [
@@ -80,6 +80,16 @@ class FilesController extends Controller
                 'featured' => true
             ]);
 
+            return response()->json( [
+                'message'   => "File uploaded successfully.",
+                'status'    => "success",
+                'path'      => $media->getDiskPath(),
+                'user_path' => $userFilePath,
+                'url'       => $media->getUrl(),
+                'id'        => $media->getKey()
+            ] );
+        }
+        if( $media && $id == 'companylogo') {
             return response()->json( [
                 'message'   => "File uploaded successfully.",
                 'status'    => "success",

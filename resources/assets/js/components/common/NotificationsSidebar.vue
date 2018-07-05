@@ -143,9 +143,16 @@
                                         <span>Revoke Invite</span>
                                     </md-button>
 
+                                    <!-- <md-button class="md-primary md-adj-width" :href="actionLink(shared.notification)"> -->
                                     <md-button class="md-primary md-adj-width" :href="actionLink(shared.notification)">
                                         <md-icon clas="md-primary">info_outline</md-icon>
                                         <span>{{ actionTitle(shared.notification) }}</span>
+                                    </md-button>
+
+                                    <md-button class="md-primary md-adj-width" @click="awardJob(shared.notification)"
+                                               v-if="shared.notification.type == 'job-invite' && owner == shared.notification.to_user_id && shared.notification.job && shared.notification.nice_title.indexOf('Accepted Your Job Invite') > 0">
+                                        <md-icon clas="md-primary">event_available</md-icon>
+                                        <span>Award Job</span>
                                     </md-button>
                                 </div>
 
@@ -207,7 +214,7 @@
 			this.owner = this.user.id;
 			if (this.user.id) {
 				this.refreshNotifications();
-            }
+      }
 
 		},
 		created() {
@@ -334,6 +341,7 @@
 			 * @param notification
 			 */
 			actionLink(notification) {
+        console.log(notification);
 				if (notification.type == "agency-invite" || notification.type == "agency-invite-request") {
                     /* Link to users profile */
 					if (this.agency == notification.agency_id) {
@@ -393,6 +401,20 @@
 						this.updateStatus(notification, "archived");
 						this.refreshNotifications();
 					}, 3000);
+				}, (response) => {
+					this.$root.showNotification(response.body.message);
+				});
+				this.updateStatus(notification, "archived");
+			},
+			awardJob(notification) {
+        console.log(notification);
+				var apiUrl = '/apiv1/notifications/awardJob/' + notification.id;
+				this.$http.post(apiUrl).then((response) => {
+					this.$root.showNotification(response.body.message);
+					// setTimeout(() => {
+						this.updateStatus(notification, "archived");
+						this.refreshNotifications();
+					// }, 3000);
 				}, (response) => {
 					this.$root.showNotification(response.body.message);
 				});

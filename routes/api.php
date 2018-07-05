@@ -85,6 +85,7 @@ Route::post( '/notifications/delete/{notification}', 'Api\NotificationsControlle
 Route::post( '/notifications/revokeInvite/{notification}', 'Api\NotificationsController@revokeInvite' );
 Route::post( '/notifications/rejectInvite/{notification}', 'Api\NotificationsController@rejectInvite' );
 Route::post( '/notifications/acceptInvite/{notification}', 'Api\NotificationsController@acceptInvite' );
+Route::post( '/notifications/awardJob/{notification}', 'Api\NotificationsController@awardJob' );
 Route::post( '/notifications/rejectJobInvite/{notification}', 'Api\NotificationsController@rejectJobInvite' );
 Route::post( '/notifications/acceptJobInvite/{notification}', 'Api\NotificationsController@acceptJobInvite' );
 Route::post( '/notifications/requestInvite/{notification}', 'Api\NotificationsController@requestInvite' );
@@ -108,6 +109,7 @@ Route::post( '/agencies/delete/{agency}', 'Api\AgenciesController@delete' );
 Route::post( '/files/create/{folder}', 'Api\FilesController@create' );
 Route::post( '/files/create', 'Api\FilesController@create' );
 Route::post( '/files/avatar', 'Api\FilesController@avatar' );
+Route::post( '/files/avatar/{id}', 'Api\FilesController@avatar' );
 Route::post( '/files/agencyAvatar/{agency}', 'Api\FilesController@agencyAvatar' );
 
 /* Token Based API

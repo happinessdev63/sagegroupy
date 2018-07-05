@@ -183,11 +183,11 @@
             window.Laravel.profile = <?php echo json_encode( $user ); ?>;
             window.sageSource.user = <?php echo json_encode( Auth::user() ?: [] ); ?>;
             window.sageSource.profile = <?php echo json_encode( $user ); ?>;
-            window.sageSource.curPage = 'viewProfile';
+            window.sageSource.curPage = 'downloadProfile';
          </script>
     </head>
     <body>
-        <div id="app">
+        <div id="app" class="md-whiteframe-3dp">
 
           <div class="row" style="margin-top: 20px; background-color: white; padding: 20px;position:relative;" id="profile">
             <div style="display:inline;" id="logo">
@@ -195,12 +195,16 @@
                   <img src="{{ asset($user->avatar) }}" class="img-thumbnail" alt="{{ $user->name }}"/>
               </div>
               <div class="col-sm-9">
-                <div style="position:relative; float:right; width: 20%; height: 20%;" id="companyLogo">
-                    <img src="{{ asset('/img/logo_xs.png') }}" style="width:100%"/>
-                    <!-- <md-button @click="$root.emitEvent('editAvatar')" class="md-transparent font-size-10 margin-left-5">Edit Avatar</md-button> -->
+                <div style="position:relative; float:right; width: 20%; height: 20%; display: inline-block;" id="companyLogo" >
+                  <sage-image-cropper-only imageurl = "{{ asset('/img/logo_xs.png') }}"></sage-image-cropper-only>
+                  <div style="padding-left: 10%;">
                     <a style="color: rgba(0, 150, 136, 0.95); font-size: 10px; padding-left: 0px; text-decoration: none;" href="/profile/{{ $user->id }}">
                       View on SageGroupy
                     </a>
+                  </div>
+                  <div style="padding-left: 10%;">
+                    <md-button @click="$root.emitEvent('editAvatar')" id="changeLogo" class="md-raised md-primary font-size-10 margin-left-5">Change logo</md-button>
+                  </div>
                 </div>
 
                 <h3 class=" ">{{ $user->name }}</h3>
@@ -290,7 +294,7 @@
                     </md-list-item>
                     @endforeach
                 </md-list>
-                <!-- <md-button class="md-raised md-primary pull-right" id="startBtn" @click="makePdf()">Download</md-button> -->
+                <md-button class="md-raised md-primary pull-right" id="startBtn" @click="makePdf()">Download</md-button>
             </div>
           </div>
       </div>
