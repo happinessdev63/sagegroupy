@@ -240,6 +240,8 @@
                 <sage-profile-references></sage-profile-references>
             </div>
 
+            <div class="html2pdf__page-break"></div>
+
             <div id="additional" class="col-lg-12 margin-top-10">
                 <h4 class="margin-bottom-10" style="color: #e91e63;"><md-icon>class</md-icon>Additional References</h4>
                 <hr class="green-hr margin-top-5" style="border-color: #e91e63;"/>
