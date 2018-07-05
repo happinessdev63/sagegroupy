@@ -107,7 +107,7 @@
               this.shared.job.freelancer_feedback = value;
             },
             endJob() {
-
+              
                 var apiUrl = '/apiv1/jobs/end/' + this.shared.job.id;
                 this.$http.post(apiUrl, this.shared.job).then((response) => {
                     this.$root.showNotification(response.body.message);

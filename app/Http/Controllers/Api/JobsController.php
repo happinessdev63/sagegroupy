@@ -11,6 +11,7 @@ use App\Agency;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use App\Notification;
 
 class JobsController extends Controller
 {
@@ -461,7 +462,6 @@ class JobsController extends Controller
      */
     public function end( Request $request, Job $job )
     {
-
         /**
          * @todo - Add support/checks for agencies
          * @todo - Centralize job permission checks
@@ -471,6 +471,7 @@ class JobsController extends Controller
          */
         $canEdit = false;
         if (
+            /********** To ending this job by freelancer ********/
             \Auth::user()->id == $job->client_id
             || \Auth::user()->isAdmin()
             || (\Auth::user()->id == $job->freelancer_id && $job->type == "reference")
@@ -479,13 +480,26 @@ class JobsController extends Controller
             $canEdit = true;
         }
 
-        if (!$canEdit) {
-            return response()->json( [
-                'message' => "You do not have permission to end this job.",
-                'status'  => "error"
-            ],
-                Response::HTTP_UNPROCESSABLE_ENTITY
-            );
+        if (\Auth::user()->id == $job->freelancer_id && $job->type == "standard") {
+            $endFlg = DB::table('jobs')->where('id', '=', $job->id)->update(['freelancer_id' => null, 'public' => 1]);
+            $jobNotification = Notification::create( [
+                'type'         => "job-end",
+                'to_user_id'   => $job->client_id,
+                'job_id'       => $job->id,
+                'from_user_id' => $job->client_id,
+                'owner_id'     => $job->client_id,
+                'status'       => 'unread',
+                'title'        => "Finished this job by the freelancer: ".$request->freelancer['name'],
+                'message'      => "This job was finished by following reason from freelancer: ".$request->freelancer['name']."\n\t".$request->end_reason."Please find another freelancer again.",
+                'owner_type'   => 'user'
+            ] );
+
+            if( $endFlg ){
+              return response()->json( [
+                  'message' => "This job was just finished.",
+                  'status'  => "success"
+              ]);
+            }
         }
 
         /* Validate required fields */
