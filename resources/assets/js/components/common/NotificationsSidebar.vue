@@ -331,7 +331,7 @@
 					}
 				}
 
-				if (notification.job && (notification.type == "job-message" || notification.type == "job-reminder" || notification.type == "job-invite")) {
+				if (notification.job && (notification.type == "job-message" || notification.type == "job-reminder" || notification.type == "job-invite" || notification.type == "job-end")) {
 					return "View Job";
 				}
 
@@ -341,7 +341,6 @@
 			 * @param notification
 			 */
 			actionLink(notification) {
-        console.log(notification);
 				if (notification.type == "agency-invite" || notification.type == "agency-invite-request") {
                     /* Link to users profile */
 					if (this.agency == notification.agency_id) {
@@ -372,7 +371,7 @@
 					}
 				}
 
-				if (notification.job && (notification.type == "job-message" || notification.type == "job-reminder" || notification.type == "job-invite")) {
+				if (notification.job && (notification.type == "job-message" || notification.type == "job-reminder" || notification.type == "job-invite" || notification.type == "job-end" )) {
 					return "/job/" + notification.job_id;
 				}
 
