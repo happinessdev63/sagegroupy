@@ -490,7 +490,7 @@ class JobsController extends Controller
                 'owner_id'     => $job->client_id,
                 'status'       => 'unread',
                 'title'        => "Finished this job by the freelancer: ".$request->freelancer['name'],
-                'message'      => "This job was finished by following reason from freelancer: ".$request->freelancer['name']."\n\t".$request->end_reason."Please find another freelancer again.",
+                'message'      => "This job was finished by following reason from freelancer: ".$request->freelancer['name']."\n\n".$request->end_reason."\n\nPlease find another freelancer again.",
                 'owner_type'   => 'user'
             ] );
 

@@ -151,7 +151,6 @@ class HandleJobInviteResponse
                     'owner_type'   => 'user'
                 ] );
 
-
                 break;
 
             case "reject":
